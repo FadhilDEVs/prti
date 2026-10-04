@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Presentasi Kelompok 9 - Ekosistem Pesisir, Laut & SDA Energi</title>
+  <title>Presentasi Kelompok 9 - Tema 7: Ekosistem Pantai, Estuari, Laut & SDA Energi</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -11,8 +11,8 @@
   <style>
     :root {
       --bg-dark: #020713;
-      --bg-card: rgba(8, 22, 42, 0.76);
-      --border-card: rgba(0, 242, 254, 0.22);
+      --bg-card: rgba(8, 22, 42, 0.82);
+      --border-card: rgba(0, 242, 254, 0.25);
       --accent-cyan: #00f2fe;
       --accent-blue: #4facfe;
       --accent-emerald: #10b981;
@@ -55,7 +55,6 @@
       pointer-events: none;
     }
 
-    /* Ambient animated oceanic glow orbs */
     .ambient-glow {
       position: fixed;
       width: 60vw;
@@ -121,9 +120,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 100;
+      z-index: 200;
       backdrop-filter: blur(16px);
-      background: rgba(2, 7, 19, 0.78);
+      background: rgba(2, 7, 19, 0.85);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       gap: 12px;
     }
@@ -155,20 +154,22 @@
 
     .mode-switch-container {
       display: flex;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(0, 242, 254, 0.3);
       border-radius: 12px;
       padding: 3px;
       gap: 3px;
+      position: relative;
+      z-index: 210;
     }
 
     .btn-mode {
       background: transparent;
       border: none;
       color: var(--text-muted);
-      padding: 6px 14px;
+      padding: 7px 16px;
       border-radius: 9px;
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
@@ -176,6 +177,7 @@
       gap: 6px;
       transition: all 0.25s ease;
       white-space: nowrap;
+      pointer-events: auto;
     }
 
     .btn-mode.active {
@@ -234,12 +236,32 @@
       flex-shrink: 0;
     }
 
-    body.mode-audience .presenter-only {
+    body.mode-audience .presenter-only,
+    body.mode-audience .current-presenter-badge,
+    body.mode-audience .speaker-pill,
+    body.mode-audience .timer-badge,
+    body.mode-audience .teleprompter-drawer {
       display: none !important;
     }
 
     body.mode-presenter .presenter-only {
       display: inline-flex !important;
+    }
+
+    body.mode-presenter .current-presenter-badge {
+      display: inline-flex !important;
+    }
+
+    body.mode-presenter .speaker-pill {
+      display: inline-flex !important;
+    }
+
+    body.mode-presenter .timer-badge {
+      display: inline-flex !important;
+    }
+
+    body.mode-presenter .teleprompter-drawer {
+      display: block;
     }
 
     .deck-container {
@@ -277,7 +299,6 @@
       pointer-events: auto;
     }
 
-    /* Tata Letak Polos & Terpusat untuk Slide Penutup */
     .slide.slide-center {
       align-items: center;
       text-align: center;
@@ -293,117 +314,6 @@
       margin-right: auto;
     }
 
-    /* Dedicated Q&A Bank Modal / Tempat Khusus Contekan */
-    .qna-modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(2, 6, 18, 0.92);
-      backdrop-filter: blur(24px);
-      z-index: 350;
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition: all 0.35s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px 16px;
-    }
-
-    .qna-modal-overlay.open {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-    }
-
-    .qna-modal-card {
-      background: rgba(8, 22, 42, 0.98);
-      border: 1.5px solid var(--accent-gold);
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), 0 0 35px rgba(255, 209, 102, 0.25);
-      border-radius: 20px;
-      width: 96%;
-      max-width: 920px;
-      max-height: 86vh;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      animation: modalPop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    @keyframes modalPop {
-      from { transform: scale(0.92) translateY(20px); opacity: 0; }
-      to { transform: scale(1) translateY(0); opacity: 1; }
-    }
-
-    .qna-modal-header {
-      padding: 18px 24px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(14, 32, 60, 0.8);
-      gap: 12px;
-    }
-
-    .qna-modal-header h3 {
-      font-size: 1.15rem;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .qna-filter-bar {
-      padding: 12px 24px;
-      background: rgba(4, 12, 26, 0.9);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .qna-filter-btn {
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: var(--text-muted);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
-
-    .qna-filter-btn:hover {
-      border-color: var(--accent-gold);
-      color: #fff;
-    }
-
-    .qna-filter-btn.active {
-      background: var(--accent-gold);
-      color: #020713;
-      border-color: var(--accent-gold);
-      box-shadow: 0 0 14px rgba(255, 209, 102, 0.4);
-    }
-
-    .qna-modal-body {
-      padding: 20px 24px;
-      overflow-y: auto;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    /* Morphing element classes */
-    [data-morph] {
-      will-change: transform, opacity;
-      transform-origin: top left;
-    }
-
     .slide-badge-wrapper {
       display: flex;
       align-items: center;
@@ -415,37 +325,38 @@
     .tag-category {
       font-family: 'Space Grotesk', sans-serif;
       text-transform: uppercase;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 2px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 1.8px;
       color: var(--accent-cyan);
-      background: rgba(0, 242, 254, 0.1);
-      padding: 4px 14px;
+      background: rgba(0, 242, 254, 0.12);
+      padding: 5px 16px;
       border-radius: 30px;
-      border: 1px solid rgba(0, 242, 254, 0.3);
+      border: 1px solid rgba(0, 242, 254, 0.35);
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.12);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
     }
 
     .speaker-pill {
-      font-size: 0.82rem;
-      font-weight: 600;
+      font-size: 0.84rem;
+      font-weight: 700;
       color: var(--accent-gold);
-      background: rgba(255, 209, 102, 0.12);
-      border: 1px solid rgba(255, 209, 102, 0.3);
-      padding: 4px 14px;
+      background: rgba(255, 209, 102, 0.14);
+      border: 1px solid rgba(255, 209, 102, 0.35);
+      padding: 5px 16px;
       border-radius: 30px;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
     h1.slide-title-hero {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2.2rem, 4.8vw, 3.5rem);
-      line-height: 1.16;
-      font-weight: 700;
+      font-size: clamp(2.3rem, 5vw, 3.6rem);
+      line-height: 1.15;
+      font-weight: 800;
       margin-bottom: 16px;
       background: linear-gradient(135deg, #ffffff 40%, var(--accent-cyan) 80%, var(--accent-blue) 100%);
       -webkit-background-clip: text;
@@ -455,10 +366,10 @@
 
     h2.slide-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1.65rem, 3.4vw, 2.4rem);
-      font-weight: 700;
+      font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+      font-weight: 800;
       line-height: 1.25;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       color: #fff;
     }
 
@@ -469,43 +380,138 @@
     }
 
     p.lead-text {
-      font-size: clamp(1rem, 1.8vw, 1.2rem);
-      line-height: 1.7;
-      color: #cbd5e1;
+      font-size: clamp(1.05rem, 1.9vw, 1.25rem);
+      line-height: 1.65;
+      color: #e2e8f0;
       max-width: 950px;
       font-weight: 400;
     }
 
-    /* The Morphing Narrative Box (Parent to be split) */
     .narrative-box {
-      background: rgba(10, 28, 52, 0.72);
-      border: 1px solid rgba(0, 242, 254, 0.28);
+      background: rgba(10, 28, 52, 0.85);
+      border: 1px solid rgba(0, 242, 254, 0.35);
       border-left: 5px solid var(--accent-cyan);
       border-radius: 14px;
       padding: 18px 24px;
-      font-size: clamp(0.98rem, 1.8vw, 1.14rem);
-      line-height: 1.75;
-      color: #e2e8f0;
-      margin-bottom: 18px;
+      font-size: clamp(1rem, 1.8vw, 1.18rem);
+      line-height: 1.7;
+      color: #f1f5f9;
+      margin-bottom: 16px;
       backdrop-filter: blur(14px);
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
       position: relative;
       overflow: hidden;
     }
 
-    .narrative-box::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 150px;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.06));
-      pointer-events: none;
+    .narrative-box strong { color: #ffffff; font-weight: 700; }
+    .narrative-box em { color: var(--accent-cyan); font-style: normal; font-weight: 600; }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 18px;
+      align-items: stretch;
+      margin-top: 10px;
     }
 
-    .narrative-box strong { color: #fff; }
-    .narrative-box em { color: var(--accent-cyan); font-style: normal; }
+    .evidence-box {
+      background: rgba(6, 18, 36, 0.9);
+      border: 1px solid rgba(0, 242, 254, 0.35);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .evidence-img-wrapper {
+      position: relative;
+      width: 100%;
+      height: 195px;
+      overflow: hidden;
+      background: #020713;
+    }
+
+    .evidence-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .evidence-box:hover .evidence-img {
+      transform: scale(1.06);
+    }
+
+    .evidence-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(2, 7, 19, 0.9);
+      border: 1px solid var(--accent-cyan);
+      color: var(--accent-cyan);
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 20px;
+      backdrop-filter: blur(8px);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .evidence-caption {
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #cbd5e1;
+      background: rgba(8, 22, 42, 0.95);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .source-citation {
+      margin-top: 8px;
+      font-size: 0.76rem;
+      color: var(--accent-gold);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .stat-badge-container {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .stat-pill-item {
+      background: rgba(0, 242, 254, 0.09);
+      border: 1px solid rgba(0, 242, 254, 0.28);
+      border-radius: 12px;
+      padding: 10px 14px;
+      flex: 1;
+      min-width: 130px;
+    }
+
+    .stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+    }
+
+    .stat-desc {
+      font-size: 0.78rem;
+      color: #cbd5e1;
+      line-height: 1.35;
+      margin-top: 2px;
+    }
 
     .grid-points {
       display: grid;
@@ -522,22 +528,10 @@
       border-radius: 14px;
       padding: 18px 20px;
       backdrop-filter: blur(14px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.28);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
       position: relative;
       overflow: hidden;
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .point-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
-      opacity: 0;
-      transition: opacity 0.3s ease;
     }
 
     .point-card:hover {
@@ -545,13 +539,11 @@
       box-shadow: 0 16px 36px var(--glow-cyan);
     }
 
-    .point-card:hover::before { opacity: 1; }
-
     .point-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #ffffff;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -559,31 +551,9 @@
     }
 
     .point-desc {
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       line-height: 1.6;
-      color: #94a3b8;
-    }
-
-    /* Threat / Warning Fracture Styling */
-    .point-card.alert-threat {
-      border-color: rgba(255, 82, 82, 0.35);
-      background: rgba(38, 12, 18, 0.65);
-    }
-    .point-card.alert-threat::before { background: linear-gradient(90deg, #ff5252, #ff8e53); }
-    .point-card.alert-threat:hover {
-      border-color: var(--accent-coral);
-      box-shadow: 0 16px 36px var(--glow-coral);
-    }
-
-    /* Solution / Ecology Bloom Styling */
-    .point-card.alert-solution {
-      border-color: rgba(16, 185, 129, 0.35);
-      background: rgba(6, 34, 25, 0.65);
-    }
-    .point-card.alert-solution::before { background: linear-gradient(90deg, #10b981, #00f2fe); }
-    .point-card.alert-solution:hover {
-      border-color: var(--accent-emerald);
-      box-shadow: 0 16px 36px var(--glow-emerald);
+      color: #cbd5e1;
     }
 
     .team-grid {
@@ -594,23 +564,20 @@
     }
 
     .team-card {
-      background: rgba(12, 25, 46, 0.72);
-      border: 1px solid rgba(255, 255, 255, 0.09);
+      background: rgba(12, 25, 46, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 14px;
       padding: 14px;
       display: flex;
       align-items: center;
       gap: 12px;
       transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
     }
 
     .team-card:hover {
-      background: rgba(0, 242, 254, 0.09);
+      background: rgba(0, 242, 254, 0.12);
       border-color: var(--accent-cyan);
       transform: translateY(-3px);
-      box-shadow: 0 12px 28px rgba(0, 242, 254, 0.2);
     }
 
     .team-avatar {
@@ -618,7 +585,7 @@
       height: 44px;
       min-width: 44px;
       border-radius: 12px;
-      background: linear-gradient(135deg, rgba(0, 242, 254, 0.2), rgba(79, 172, 254, 0.3));
+      background: linear-gradient(135deg, rgba(0, 242, 254, 0.25), rgba(79, 172, 254, 0.35));
       border: 1px solid var(--accent-cyan);
       display: flex;
       align-items: center;
@@ -628,9 +595,9 @@
       font-size: 1.05rem;
     }
 
-    .team-name { font-weight: 700; font-size: 0.9rem; color: #fff; }
-    .team-nim { font-size: 0.78rem; color: var(--accent-cyan); font-family: 'Space Grotesk', monospace; }
-    .team-role { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+    .team-name { font-weight: 700; font-size: 0.92rem; color: #fff; }
+    .team-nim { font-size: 0.78rem; color: var(--accent-cyan); font-family: 'Space Grotesk', monospace; font-weight: 700; }
+    .team-role { font-size: 0.74rem; color: var(--text-muted); margin-top: 2px; }
 
     footer {
       position: fixed;
@@ -643,7 +610,7 @@
       align-items: center;
       z-index: 100;
       backdrop-filter: blur(16px);
-      background: rgba(2, 7, 19, 0.82);
+      background: rgba(2, 7, 19, 0.85);
       border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
@@ -678,16 +645,15 @@
 
     .slide-counter span {
       color: var(--accent-cyan);
-      font-weight: 700;
+      font-weight: 800;
       font-size: 1.15rem;
     }
 
     .timer-badge {
-      display: none;
       align-items: center;
       gap: 6px;
-      background: rgba(255, 209, 102, 0.12);
-      border: 1px solid rgba(255, 209, 102, 0.3);
+      background: rgba(255, 209, 102, 0.14);
+      border: 1px solid rgba(255, 209, 102, 0.35);
       padding: 4px 10px;
       border-radius: 16px;
       font-family: 'Space Grotesk', monospace;
@@ -696,18 +662,15 @@
       font-weight: 700;
     }
 
-    body.mode-presenter .timer-badge {
-      display: inline-flex;
-    }
-
     .current-presenter-badge {
       align-items: center;
       gap: 8px;
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.08);
       padding: 5px 12px;
       border-radius: 20px;
-      font-size: 0.82rem;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.84rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-weight: 600;
     }
 
     .current-presenter-badge .dot {
@@ -763,10 +726,10 @@
       transform: translateX(-50%) translateY(125%);
       width: 92%;
       max-width: 950px;
-      background: rgba(4, 14, 28, 0.96);
-      border: 1px solid var(--accent-cyan);
+      background: rgba(4, 14, 28, 0.97);
+      border: 1.5px solid var(--accent-cyan);
       border-radius: 16px 16px 0 0;
-      box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.7), 0 0 30px var(--glow-cyan);
+      box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.75), 0 0 30px var(--glow-cyan);
       backdrop-filter: blur(25px);
       z-index: 150;
       transition: transform 0.45s var(--spring-morph);
@@ -782,213 +745,195 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       padding-bottom: 8px;
       gap: 10px;
       flex-wrap: wrap;
     }
 
-    .teleprompter-speaker {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .teleprompter-speaker h4 { font-size: 0.98rem; color: #fff; }
+    .teleprompter-speaker { display: flex; align-items: center; gap: 8px; }
+    .teleprompter-speaker h4 { font-size: 1rem; color: #fff; font-weight: 700; }
     .teleprompter-speaker span {
-      background: rgba(0, 242, 254, 0.15);
+      background: rgba(0, 242, 254, 0.18);
       color: var(--accent-cyan);
       padding: 2px 8px;
       border-radius: 6px;
-      font-size: 0.75rem;
-      font-weight: 700;
-    }
-
-    .teleprompter-controls { display: flex; gap: 6px; align-items: center; }
-
-    .btn-qna-tab {
-      background: rgba(255, 209, 102, 0.16);
-      border: 1px solid var(--accent-gold);
-      color: var(--accent-gold);
-      padding: 6px 14px;
-      border-radius: 8px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.25s ease;
-    }
-
-    .btn-qna-tab:hover {
-      background: var(--accent-gold);
-      color: #020713;
-      box-shadow: 0 0 16px rgba(255, 209, 102, 0.4);
-    }
-
-    .qna-item {
-      background: rgba(12, 25, 46, 0.85);
-      border: 1px solid rgba(0, 242, 254, 0.2);
-      border-left: 4px solid var(--accent-cyan);
-      border-radius: 10px;
-      padding: 14px 18px;
-      transition: all 0.25s ease;
-    }
-
-    .qna-item.highlight-lecturer {
-      border-left-color: var(--accent-gold);
-      background: rgba(28, 22, 10, 0.82);
-    }
-
-    .qna-item-badge {
-      display: inline-block;
-      font-size: 0.72rem;
+      font-size: 0.76rem;
       font-weight: 800;
-      color: var(--accent-cyan);
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      margin-bottom: 6px;
-    }
-
-    .qna-item.highlight-lecturer .qna-item-badge {
-      color: var(--accent-gold);
-    }
-
-    .qna-question {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 8px;
-      line-height: 1.45;
-    }
-
-    .qna-answer {
-      font-size: 0.92rem;
-      line-height: 1.65;
-      color: #cbd5e1;
-    }
-
-    .qna-answer strong {
-      color: var(--accent-cyan);
     }
 
     .teleprompter-text {
-      font-size: 1.1rem;
+      font-size: 1.12rem;
       line-height: 1.7;
       color: #f1f5f9;
-      max-height: 150px;
+      max-height: 155px;
       overflow-y: auto;
       padding-right: 8px;
     }
 
-    .teleprompter-text strong { color: var(--accent-cyan); }
-    .teleprompter-text .cue { color: var(--accent-gold); font-style: italic; font-size: 0.92rem; display: block; margin: 4px 0; }
+    .teleprompter-text strong { color: var(--accent-cyan); font-weight: 700; }
+    .teleprompter-text .cue {
+      color: var(--accent-gold);
+      font-style: italic;
+      font-size: 0.94rem;
+      display: inline-block;
+      margin: 4px 0;
+      background: rgba(255, 209, 102, 0.1);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
 
-    .overview-modal {
+    .sheet-modal-overlay, .qna-modal-overlay, .overview-modal {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(2, 6, 16, 0.94);
-      backdrop-filter: blur(22px);
-      z-index: 300;
+      background: rgba(2, 6, 18, 0.92);
+      backdrop-filter: blur(24px);
+      z-index: 350;
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transition: all 0.3s ease;
+      transition: all 0.35s ease;
       display: flex;
-      flex-direction: column;
-      padding: 30px 20px;
-      overflow-y: auto;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
     }
 
-    .overview-modal.open {
+    .sheet-modal-overlay.open, .qna-modal-overlay.open, .overview-modal.open {
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
     }
 
-    .overview-header {
+    .sheet-modal-card {
+      background: rgba(8, 22, 42, 0.98);
+      border: 1.5px solid var(--accent-cyan);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), 0 0 35px var(--glow-cyan);
+      border-radius: 20px;
+      width: 96%;
+      max-width: 820px;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .sheet-modal-header {
+      padding: 16px 22px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 24px;
-      max-width: 1200px;
-      width: 100%;
-      margin-left: auto;
-      margin-right: auto;
+      background: rgba(14, 32, 60, 0.8);
     }
 
-    .overview-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 16px;
-      max-width: 1200px;
-      width: 100%;
-      margin: 0 auto;
+    .sheet-modal-body { padding: 20px 22px; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 16px; }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-label { font-size: 0.85rem; font-weight: 700; color: var(--accent-cyan); }
+    .form-input {
+      background: rgba(2, 7, 19, 0.8);
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .form-input:focus { border-color: var(--accent-cyan); box-shadow: 0 0 12px var(--glow-cyan); }
+
+    .btn-submit {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      color: #020713;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      justify-content: center;
+      transition: all 0.25s ease;
     }
 
-    .overview-thumb {
-      background: rgba(12, 25, 46, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 14px;
+    .btn-submit:hover { box-shadow: 0 0 18px var(--glow-cyan); transform: translateY(-2px); }
+
+    .qna-modal-card {
+      background: rgba(8, 22, 42, 0.98); border: 1.5px solid var(--accent-gold);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8); border-radius: 20px;
+      width: 96%; max-width: 920px; max-height: 86vh; display: flex; flex-direction: column; overflow: hidden;
+    }
+
+    .qna-modal-header { padding: 18px 24px; border-bottom: 1px solid rgba(255, 255, 255, 0.12); display: flex; justify-content: space-between; align-items: center; background: rgba(14, 32, 60, 0.8); }
+    .qna-modal-body { padding: 20px 24px; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 14px; }
+
+    .qna-filter-bar {
+      padding: 10px 22px;
+      background: rgba(4, 12, 26, 0.9);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .qna-filter-btn {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.25s ease;
     }
 
-    .overview-thumb:hover, .overview-thumb.current {
-      border-color: var(--accent-cyan);
-      box-shadow: 0 0 20px var(--glow-cyan);
-      background: rgba(0, 242, 254, 0.08);
-      transform: translateY(-3px);
+    .qna-filter-btn.active {
+      background: var(--accent-gold);
+      color: #020713;
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 14px rgba(255, 209, 102, 0.4);
     }
 
-    .overview-thumb-num {
-      font-family: 'Space Grotesk', monospace;
-      font-size: 0.78rem;
-      color: var(--accent-cyan);
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
+    .qna-item { background: rgba(12, 25, 46, 0.88); border: 1px solid rgba(0, 242, 254, 0.22); border-left: 4px solid var(--accent-cyan); border-radius: 10px; padding: 14px 18px; }
+    .qna-item.highlight-lecturer { border-left-color: var(--accent-gold); background: rgba(28, 22, 10, 0.88); }
+    .qna-item-badge { display: inline-block; font-size: 0.72rem; font-weight: 800; color: var(--accent-cyan); text-transform: uppercase; margin-bottom: 6px; }
+    .qna-item.highlight-lecturer .qna-item-badge { color: var(--accent-gold); }
+    .qna-question { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .qna-answer { font-size: 0.92rem; line-height: 1.65; color: #cbd5e1; }
 
-    .overview-thumb-title { font-size: 0.9rem; font-weight: 600; color: #fff; line-height: 1.35; }
-    .overview-thumb-speaker { font-size: 0.72rem; color: var(--text-muted); margin-top: 6px; }
+    .overview-modal { flex-direction: column; justify-content: flex-start; padding: 30px 20px; overflow-y: auto; }
+    .overview-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; max-width: 1200px; width: 100%; margin: 0 auto 24px auto; }
+    .overview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; max-width: 1200px; width: 100%; margin: 0 auto; }
+    .overview-thumb { background: rgba(12, 25, 46, 0.75); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 12px; padding: 14px; cursor: pointer; transition: all 0.25s ease; }
+    .overview-thumb:hover, .overview-thumb.current { border-color: var(--accent-cyan); box-shadow: 0 0 20px var(--glow-cyan); background: rgba(0, 242, 254, 0.1); transform: translateY(-3px); }
+    .overview-thumb-num { font-family: 'Space Grotesk', monospace; font-size: 0.78rem; color: var(--accent-cyan); font-weight: 800; margin-bottom: 4px; }
+    .overview-thumb-title { font-size: 0.92rem; font-weight: 600; color: #fff; }
+    .overview-thumb-speaker { font-size: 0.74rem; color: var(--text-muted); margin-top: 6px; }
 
     ::-webkit-scrollbar { width: 5px; height: 5px; }
     ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
     ::-webkit-scrollbar-thumb { background: rgba(0, 242, 254, 0.4); border-radius: 4px; }
 
     @media (max-width: 900px) {
-      .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
-      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .grid-3, .grid-4, .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .evidence-grid { grid-template-columns: 1fr; }
       .brand-title { display: none; }
     }
 
     @media (max-width: 680px) {
       header { padding: 10px 14px; }
-      .brand-badge { font-size: 0.75rem; padding: 3px 8px; }
-      .btn-mode { padding: 5px 8px; font-size: 0.75rem; }
       .deck-container { padding: 65px 14px 75px 14px; }
-      .slide {
-        width: 100%;
-        height: auto;
-        max-height: calc(100vh - 145px);
-        padding-top: 10px;
-        padding-bottom: 25px;
-      }
-      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr !important; gap: 10px; }
-      .team-grid { grid-template-columns: 1fr !important; gap: 10px; }
-      .team-card { padding: 10px 12px; }
-      .point-card { padding: 14px 16px; }
+      .slide { width: 100%; height: auto; max-height: calc(100vh - 145px); }
+      .grid-2, .grid-3, .grid-4, .team-grid { grid-template-columns: 1fr !important; gap: 10px; }
       footer { padding: 10px 14px; }
-      .btn-nav { padding: 7px 12px; font-size: 0.78rem; }
-      .current-presenter-badge { display: none !important; }
       .hide-mobile { display: none !important; }
       .teleprompter-drawer { width: 96%; bottom: 60px; padding: 14px 16px; }
-      .teleprompter-text { font-size: 1rem; max-height: 120px; }
     }
   </style>
 </head>
@@ -1006,7 +951,7 @@
       <span class="brand-title">Pengantar Ilmu Lingkungan • Kelompok 9</span>
     </div>
 
-    <!-- Dual Mode Switcher: Audience vs Presenter -->
+    <!-- Dual Mode Switcher -->
     <div class="mode-switch-container">
       <button class="btn-mode active" id="btnModeAudience" title="Tampilan Bersih untuk Penonton / Layar Proyektor">
         <svg class="icon-svg" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
@@ -1019,7 +964,10 @@
     </div>
 
     <div class="header-controls">
-      <!-- Tombol Khusus Bank Jawaban Q&A (Muncul di Mode Presenter) -->
+      <button class="btn-icon presenter-only" id="btnOpenSheetModal" style="border-color: var(--accent-emerald); color: var(--accent-emerald);" title="Upload Foto & Sync Google Sheet">
+        <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <span class="hide-mobile">Upload / Sheet</span>
+      </button>
       <button class="btn-icon presenter-only" id="btnHeaderQnA" style="border-color: var(--accent-gold); color: var(--accent-gold);" title="Buka Bank Jawaban Q&A">
         <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         <span class="hide-mobile">Bank Jawaban</span>
@@ -1036,572 +984,326 @@
 
   <main class="deck-container">
 
-    <!-- SLIDE 1: Judul Utama -->
+    <!-- SLIDE 1: Title -->
     <section class="slide active" data-slide="1" data-speaker="Efraim Ceme" data-nim="2511102442042">
       <div class="slide-badge-wrapper" data-morph="badge-wrapper">
-        <span class="tag-category" data-morph="tag">
-          <svg class="icon-svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          Presentasi Akademik
-        </span>
-        <span class="speaker-pill presenter-only">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
-          Presenter 1: Efraim Ceme
-        </span>
+        <span class="tag-category" data-morph="tag">Presentasi Akademik Tema 7</span>
+        <span class="speaker-pill presenter-only">Presenter 1: Efraim Ceme</span>
       </div>
       <h1 class="slide-title-hero" data-morph="title">Ekosistem Pantai, Estuari, Laut, & Potensi SDA Energi</h1>
       <p class="lead-text" data-morph="lead">
-        Kajian dinamika ekologis wilayah pesisir dan laut serta tinjauan kritis pemanfaatan energi ramah lingkungan.
+        Kajian komprehensif dinamika ekologis wilayah pesisir dan laut serta pemanfaatan energi ramah lingkungan berdasarkan data nyata nasional.
       </p>
-      <div style="margin-top: 26px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
-        <div class="point-card" data-morph="team-box" style="padding: 10px 18px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px;">
+      <div style="margin-top: 24px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
+        <div class="point-card" style="padding: 10px 18px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px;">
           <svg class="icon-svg" style="color: var(--accent-cyan);" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           <div><span style="color: var(--accent-cyan); font-weight: 700;">Kelompok 9</span> • Disusun oleh 7 Anggota Tim</div>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 2: Anggota Tim -->
+    <!-- SLIDE 2: Team Roster -->
     <section class="slide" data-slide="2" data-speaker="Efraim Ceme" data-nim="2511102442042">
       <div class="slide-badge-wrapper" data-morph="badge-wrapper">
-        <span class="tag-category" data-morph="tag">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-          Tim Penyusun & Presenter
-        </span>
-        <span class="speaker-pill presenter-only">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg>
-          Presenter 1: Efraim Ceme
-        </span>
+        <span class="tag-category" data-morph="tag">Tim Penyusun & Presenter</span>
+        <span class="speaker-pill presenter-only">Presenter 1: Efraim Ceme</span>
       </div>
       <h2 class="slide-title" data-morph="title">Anggota <span>Kelompok 9</span></h2>
-      <div class="team-grid" data-morph="team-box">
-        <div class="team-card">
-          <div class="team-avatar">1</div>
-          <div>
-            <div class="team-name">Efraim Ceme</div>
-            <div class="team-nim">2511102442042</div>
-            <div class="team-role">Slide 1, 2, 3</div>
-          </div>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar">2</div>
-          <div>
-            <div class="team-name">Ahmad Fadhil Naufal</div>
-            <div class="team-nim">2511102442194</div>
-            <div class="team-role">Slide 4, 5</div>
-          </div>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar">3</div>
-          <div>
-            <div class="team-name">Muhammad Riyas</div>
-            <div class="team-nim">2511102442066</div>
-            <div class="team-role">Slide 6, 7</div>
-          </div>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar">4</div>
-          <div>
-            <div class="team-name">Alegra Tolande</div>
-            <div class="team-nim">2511102442171</div>
-            <div class="team-role">Slide 8, 9</div>
-          </div>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar">5</div>
-          <div>
-            <div class="team-name">Adit Anugrah</div>
-            <div class="team-nim">2511102442173</div>
-            <div class="team-role">Slide 10</div>
-          </div>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar">6</div>
-          <div>
-            <div class="team-name">Wahyudin</div>
-            <div class="team-nim">2511102442189</div>
-            <div class="team-role">Slide 11</div>
-          </div>
-        </div>
-        <div class="team-card" style="grid-column: span 2;">
-          <div class="team-avatar">7</div>
-          <div>
-            <div class="team-name">Muchammad Rizky Ramadhani</div>
-            <div class="team-nim">2511102442203</div>
-            <div class="team-role">Slide 12, 13, 14 (Pelestarian & Penutup)</div>
-          </div>
-        </div>
+      <div class="team-grid">
+        <div class="team-card"><div class="team-avatar">1</div><div><div class="team-name">Efraim Ceme</div><div class="team-nim">2511102442042</div><div class="team-role">Slide 1, 2, 3</div></div></div>
+        <div class="team-card"><div class="team-avatar">2</div><div><div class="team-name">Ahmad Fadhil Naufal</div><div class="team-nim">2511102442194</div><div class="team-role">Slide 4, 5</div></div></div>
+        <div class="team-card"><div class="team-avatar">3</div><div><div class="team-name">Muhammad Riyas</div><div class="team-nim">2511102442066</div><div class="team-role">Slide 6, 7</div></div></div>
+        <div class="team-card"><div class="team-avatar">4</div><div><div class="team-name">Alegra Tolande</div><div class="team-nim">2511102442171</div><div class="team-role">Slide 8, 9</div></div></div>
+        <div class="team-card"><div class="team-avatar">5</div><div><div class="team-name">Adit Anugrah</div><div class="team-nim">2511102442173</div><div class="team-role">Slide 10</div></div></div>
+        <div class="team-card"><div class="team-avatar">6</div><div><div class="team-name">Wahyudin</div><div class="team-nim">2511102442189</div><div class="team-role">Slide 11</div></div></div>
+        <div class="team-card" style="grid-column: span 2;"><div class="team-avatar">7</div><div><div class="team-name">Muchammad Rizky Ramadhani</div><div class="team-nim">2511102442203</div><div class="team-role">Slide 12, 13, 14</div></div></div>
       </div>
     </section>
 
-    <!-- SLIDE 3: Pengertian Ekosistem (Box splits into 2 cards) -->
+    <!-- SLIDE 3: Ecosystem Definition -->
     <section class="slide" data-slide="3" data-speaker="Efraim Ceme" data-nim="2511102442042">
       <div class="slide-badge-wrapper" data-morph="badge-wrapper">
-        <span class="tag-category" data-morph="tag">
-          <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/></svg>
-          Konsep Dasar Ekologi
-        </span>
-        <span class="speaker-pill presenter-only">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg>
-          Presenter 1: Efraim Ceme
-        </span>
+        <span class="tag-category" data-morph="tag">Konsep Dasar Ekologi</span>
+        <span class="speaker-pill presenter-only">Presenter 1: Efraim Ceme</span>
       </div>
       <h2 class="slide-title" data-morph="title">Pengertian <span>Ekosistem</span></h2>
       <div class="narrative-box" data-morph="narrative">
-        Ekosistem adalah <strong>hubungan timbal balik antara makhluk hidup dengan lingkungan sekitarnya</strong>. Semua komponen di dalamnya saling berinteraksi secara dinamis sehingga terjadi <em>aliran energi</em> dan <em>daur materi</em> yang menjaga keseimbangan alam.
+        Ekosistem adalah <strong>interaksi timbal balik antara makhluk hidup dengan lingkungan fisik di sekitarnya</strong> yang membentuk kesatuan dinamis aliran energi serta daur materi.
       </div>
       <div class="grid-points grid-2">
         <div class="point-card" data-morph="card-1">
-          <div class="point-title">
-            <svg class="icon-svg-lg" style="color: var(--accent-emerald);" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
-            Komponen Biotik
-          </div>
-          <div class="point-desc">
-            Meliputi seluruh unsur makhluk hidup dalam ekosistem, seperti tumbuhan, hewan, manusia, dan mikroorganisme.
-          </div>
+          <div class="point-title">Komponen Biotik (Makhluk Hidup)</div>
+          <div class="point-desc">Seluruh organisme hidup: tumbuhan, hewan, manusia, dan mikroorganisme pengurai.</div>
         </div>
         <div class="point-card" data-morph="card-2">
-          <div class="point-title">
-            <svg class="icon-svg-lg" style="color: var(--accent-cyan);" viewBox="0 0 24 24"><path d="M12 2v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="M20 12h2"/><path d="m19.07 4.93-1.41 1.41"/><path d="M15.947 12.65a4 4 0 0 0-5.925-4.128"/><path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z"/></svg>
-            Komponen Abiotik
-          </div>
-          <div class="point-desc">
-            Meliputi seluruh unsur tak hidup di lingkungan sekitar, seperti air, cahaya matahari, suhu, tanah, pasir, dan salinitas.
-          </div>
+          <div class="point-title">Komponen Abiotik (Lingkungan Fisik)</div>
+          <div class="point-desc">Unsur tak hidup: air, cahaya matahari, suhu, tanah, pasir, dan kadar garam (salinitas).</div>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 4: Ekosistem Pantai -->
+    <!-- SLIDE 4: Coastal Ecosystem -->
     <section class="slide" data-slide="4" data-speaker="Ahmad Fadhil Naufal" data-nim="2511102442194">
       <div class="slide-badge-wrapper" data-morph="badge-wrapper">
-        <span class="tag-category" data-morph="tag">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M2 12h20"/><path d="M20 12v8H4v-8"/><path d="m4 4 16 16"/></svg>
-          Zona Peralihan Darat & Laut
-        </span>
-        <span class="speaker-pill presenter-only">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg>
-          Presenter 2: Ahmad Fadhil Naufal
-        </span>
+        <span class="tag-category" data-morph="tag">Poin 1: Ekosistem Pantai</span>
+        <span class="speaker-pill presenter-only">Presenter 2: Ahmad Fadhil Naufal</span>
       </div>
-      <h2 class="slide-title" data-morph="title">Pengertian <span>Ekosistem Pantai</span></h2>
-      <div class="narrative-box" data-morph="narrative">
-        <strong>Ekosistem pantai adalah wilayah pertemuan antara daratan dan laut.</strong> Wilayah perbatasan ini memiliki kondisi lingkungan yang sangat khas dan dinamis karena dipengaruhi secara langsung oleh pasang surut air laut, hempasan gelombang, arus laut, hembusan angin, pancaran cahaya matahari, serta karakteristik kondisi tanah atau pasir di sekitarnya.
-      </div>
-      <div class="point-card" data-morph="card-1" style="border-left: 4px solid var(--accent-cyan);">
-        <div class="point-title">
-          <svg class="icon-svg-lg" style="color: var(--accent-cyan);" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          Contoh Bentuk Ekosistem Pantai:
+      <h2 class="slide-title" data-morph="title">Karakteristik <span>Ekosistem Pantai</span></h2>
+      <div class="evidence-grid">
+        <div>
+          <div class="narrative-box" data-morph="narrative">
+            <strong>Wilayah transisi antara daratan dan laut.</strong> Dipengaruhi secara langsung oleh pasang surut air laut, terpaan gelombang, arus, dan jenis substrat pasir/karang.
+          </div>
+          <div class="stat-badge-container">
+            <div class="stat-pill-item"><div class="stat-num">3,36 Juta Ha</div><div class="stat-desc">Luas Mangrove Indonesia (20% Total Dunia)</div></div>
+            <div class="stat-pill-item"><div class="stat-num">108.000 Km</div><div class="stat-desc">Garis Pantai Indonesia (Terpanjang Ke-2)</div></div>
+          </div>
         </div>
-        <div class="point-desc" style="color: #cbd5e1; font-size: 0.98rem; margin-top: 4px;">
-          Pantai berpasir, pantai berbatu, hutan mangrove, padang lamun, dan terumbu karang.
+        <div class="evidence-box" data-morph="card-1">
+          <div class="evidence-img-wrapper">
+            <img id="img_slide4" src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=800&q=80" alt="Mangrove Indonesia" class="evidence-img">
+            <span class="evidence-tag">Bukti Nyata Lapangan</span>
+          </div>
+          <div class="evidence-caption">
+            <div id="cap_slide4"><strong>Vegetasi Mangrove Pesisir Indonesia</strong></div>
+            <p style="font-size: 0.8rem; margin-top: 3px;">Akar napas mangrove menjadi benteng pencegah abrasi & peredam gelombang rob.</p>
+            <div class="source-citation" id="src_slide4">Sumber: Peta Mangrove Nasional, KLHK RI (2023)</div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 5: Fungsi Ekosistem Pantai (Splitting into 3 cards) -->
+    <!-- SLIDE 5: Coastal Functions -->
     <section class="slide" data-slide="5" data-speaker="Ahmad Fadhil Naufal" data-nim="2511102442194">
       <div class="slide-badge-wrapper" data-morph="badge-wrapper">
-        <span class="tag-category" data-morph="tag">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Peranan Ekologis dan Sosial
-        </span>
-        <span class="speaker-pill presenter-only">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg>
-          Presenter 2: Ahmad Fadhil Naufal
-        </span>
+        <span class="tag-category" data-morph="tag">Manfaat Pesisir</span>
+        <span class="speaker-pill presenter-only">Presenter 2: Ahmad Fadhil Naufal</span>
       </div>
-      <h2 class="slide-title" data-morph="title">Fungsi <span>Ekosistem Pantai</span></h2>
-      <p style="color: #cbd5e1; font-size: 1rem; margin-bottom: 14px;" data-morph="lead">
-        Ekosistem pantai memiliki fungsi penting bagi kelangsungan hidup organisme maupun manusia:
-      </p>
+      <h2 class="slide-title" data-morph="title">Fungsi Utama <span>Ekosistem Pantai</span></h2>
       <div class="grid-points grid-3">
-        <div class="point-card" data-morph="card-1">
-          <div class="point-title">
-            <svg class="icon-svg-lg" style="color: var(--accent-cyan);" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            Habitat & Ruang Hidup
-          </div>
-          <div class="point-desc">
-            Pantai menjadi tempat hidup, mencari makan, berkembang biak, dan berlindung bagi ikan, udang, kepiting, kerang, serta burung laut.
-          </div>
-        </div>
-        <div class="point-card" data-morph="card-2">
-          <div class="point-title">
-            <svg class="icon-svg-lg" style="color: var(--accent-emerald);" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            Perlindungan Daratan
-          </div>
-          <div class="point-desc">
-            Ekosistem pantai membantu melindungi daratan dari ancaman abrasi, redaman gelombang besar, dan risiko banjir rob.
-          </div>
-        </div>
-        <div class="point-card" data-morph="card-3">
-          <div class="point-title">
-            <svg class="icon-svg-lg" style="color: var(--accent-gold);" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-            Sumber Daya & Wisata
-          </div>
-          <div class="point-desc">
-            Menyediakan sumber pangan hewani, lokasi wisata bahari, serta mata pencaharian bagi masyarakat pesisir.
-          </div>
-        </div>
+        <div class="point-card" data-morph="card-1"><div class="point-title">1. Habitat Biota Pesisir</div><div class="point-desc">Tempat tinggal, memijah, dan mencari makan bagi kepiting, udang, kerang, serta burung laut.</div></div>
+        <div class="point-card" data-morph="card-2"><div class="point-title">2. Pelindung Daratan</div><div class="point-desc">Menahan abrasi gelombang, menahan erosi tanah, dan menahan luapan banjir rob pantai.</div></div>
+        <div class="point-card" data-morph="card-3"><div class="point-title">3. Ekonomi & Pariwisata</div><div class="point-desc">Sumber mata pencaharian nelayan, potensi ekowisata bahari, dan lokasi tambak garam.</div></div>
       </div>
     </section>
 
-    <!-- SLIDE 6: Ekosistem Estuari -->
+    <!-- SLIDE 6: Estuary Ecosystem -->
     <section class="slide" data-slide="6" data-speaker="Muhammad Riyas" data-nim="2511102442066">
       <div class="slide-badge-wrapper" data-morph="badge-wrapper">
-        <span class="tag-category" data-morph="tag">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-          Zona Ekoton Perairan
-        </span>
-        <span class="speaker-pill presenter-only">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg>
-          Presenter 3: Muhammad Riyas
-        </span>
+        <span class="tag-category" data-morph="tag">Poin 1: Ekosistem Estuari (Air Payau)</span>
+        <span class="speaker-pill presenter-only">Presenter 3: Muhammad Riyas</span>
       </div>
       <h2 class="slide-title" data-morph="title">Karakteristik <span>Ekosistem Estuari</span></h2>
-      <div class="narrative-box" data-morph="narrative">
-        <strong>Estuari adalah daerah pertemuan antara air tawar dari sungai dengan air asin dari laut.</strong> Air di daerah estuari disebut <em>air payau</em> karena memiliki kadar garam di antara air tawar dan air laut. Kondisi lingkungan estuari bersifat dinamis dan dapat berubah-ubah karena dipengaruhi pasang surut, curah hujan, serta jumlah air sungai yang masuk ke laut.
-      </div>
-      <div class="point-card" data-morph="card-1" style="border-left: 4px solid var(--accent-blue);">
-        <div class="point-title">
-          <svg class="icon-svg-lg" style="color: var(--accent-blue);" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
-          Contoh Kawasan Estuari:
+      <div class="evidence-grid">
+        <div>
+          <div class="narrative-box" data-morph="narrative">
+            <strong>Muara percampuran air tawar sungai dan air asin laut (Air Payau).</strong> Memiliki fluktuasi salinitas dan kadar nutrien yang sangat tinggi.
+          </div>
+          <div class="stat-badge-container">
+            <div class="stat-pill-item"><div class="stat-num">~107.000 Ha</div><div class="stat-desc">Luas Estuari Delta Mahakam (Pusat Perikanan Kaltim)</div></div>
+            <div class="stat-pill-item"><div class="stat-num">70% Biota</div><div class="stat-desc">Tergantung Estuari Saat Fase Larva & Pembesaran</div></div>
+          </div>
         </div>
-        <div class="point-desc" style="color: #cbd5e1; font-size: 0.98rem; margin-top: 4px;">
-          Muara sungai, kawasan delta, laguna, dan kawasan mangrove.
+        <div class="evidence-box" data-morph="card-1">
+          <div class="evidence-img-wrapper">
+            <img id="img_slide6" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80" alt="Delta Mahakam Kaltim" class="evidence-img">
+            <span class="evidence-tag">Bukti Nyata Kaltim</span>
+          </div>
+          <div class="evidence-caption">
+            <div id="cap_slide6"><strong>Kawasan Estuari Delta Mahakam (Kaltim)</strong></div>
+            <p style="font-size: 0.8rem; margin-top: 3px;">Kawasan perairan payau produktif penopang budidaya kepiting & udang windu.</p>
+            <div class="source-citation" id="src_slide6">Sumber: Dinas Kelautan & Perikanan Prov. Kaltim (2022)</div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 7: Fungsi Ekosistem Estuari (Splits into 4 nursery tiles) -->
+    <!-- SLIDE 7: Estuary Functions -->
     <section class="slide" data-slide="7" data-speaker="Muhammad Riyas" data-nim="2511102442066">
       <div class="slide-badge-wrapper" data-morph="badge-wrapper">
-        <span class="tag-category" data-morph="tag">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          Peran Ekologis Vital
-        </span>
-        <span class="speaker-pill presenter-only">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg>
-          Presenter 3: Muhammad Riyas
-        </span>
+        <span class="tag-category" data-morph="tag">Peran Vital Estuari</span>
+        <span class="speaker-pill presenter-only">Presenter 3: Muhammad Riyas</span>
       </div>
-      <h2 class="slide-title" data-morph="title">Fungsi <span>Ekosistem Estuari</span></h2>
+      <h2 class="slide-title" data-morph="title">Fungsi Ekologis <span>Estuari</span></h2>
       <div class="grid-points grid-2">
-        <div class="point-card" data-morph="card-1">
-          <div class="point-title">
-            <svg class="icon-svg-lg" style="color: var(--accent-gold);" viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5c0 3.5 5 11 5 11s5-7.5 5-11a5 5 0 0 0-5-5z"/></svg>
-            Tempat Pembesaran (Nursery)
-          </div>
-          <div class="point-desc">
-            Berfungsi sebagai tempat pembesaran ikan, udang, dan kepiting sebelum organisme tersebut hidup di laut lepas.
-          </div>
-        </div>
-        <div class="point-card" data-morph="card-2">
-          <div class="point-title">
-            <svg class="icon-svg-lg" style="color: var(--accent-emerald);" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            Pangan & Berlindung
-          </div>
-          <div class="point-desc">
-            Menjadi tempat mencari makan dan berlindung yang aman dari predator maupun terpaan gelombang laut lepas.
-          </div>
-        </div>
-        <div class="point-card" data-morph="card-3">
-          <div class="point-title">
-            <svg class="icon-svg-lg" style="color: var(--accent-cyan);" viewBox="0 0 24 24"><path d="M10 2v7.31"/><path d="M14 9.3V2"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
-            Penyaring Alami Sedimen
-          </div>
-          <div class="point-desc">
-            Membantu menyaring sedimen lumpur dan sebagian bahan pencemar dari sungai sebelum masuk ke perairan laut.
-          </div>
-        </div>
-        <div class="point-card" data-morph="card-4">
-          <div class="point-title">
-            <svg class="icon-svg-lg" style="color: var(--accent-blue);" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
-            Perikanan & Tambak
-          </div>
-          <div class="point-desc">
-            Sangat mendukung kegiatan perikanan, kegiatan budidaya tambak, dan kehidupan masyarakat pesisir.
-          </div>
-        </div>
+        <div class="point-card" data-morph="card-1"><div class="point-title">1. Nursery Ground (Tempat Pembesaran)</div><div class="point-desc">Tempat aman pembesaran benih udang, kepiting, dan ikan sebelum migrasi ke laut lepas.</div></div>
+        <div class="point-card" data-morph="card-2"><div class="point-title">2. Penyaring Sedimen Alami</div><div class="point-desc">Mengendapkan lumpur dan polutan dari sungai agar air laut tetap jernih.</div></div>
+        <div class="point-card" data-morph="card-3"><div class="point-title">3. Kaya Nutrisi (Produktivitas Tinggi)</div><div class="point-desc">Pertemuan unsur hara sungai dan mineral laut menjadikannya kawasan paling subur.</div></div>
+        <div class="point-card" data-morph="card-4"><div class="point-title">4. Sentra Tambak Payau</div><div class="point-desc">Lokasi utama budidaya perikanan air payau masyarakat lokal.</div></div>
       </div>
     </section>
 
-    <!-- SLIDE 8: Ekosistem Laut -->
+    <!-- SLIDE 8: Marine Ecosystem -->
     <section class="slide" data-slide="8" data-speaker="Alegra Tolande" data-nim="2511102442171">
       <div class="slide-badge-wrapper" data-morph="badge-wrapper">
-        <span class="tag-category" data-morph="tag">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M2 12h20"/><path d="M2 17h20"/><path d="M2 7h20"/></svg>
-          Biosfer Perairan Asin
-        </span>
-        <span class="speaker-pill presenter-only">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg>
-          Presenter 4: Alegra Tolande
-        </span>
+        <span class="tag-category" data-morph="tag">Poin 2: Ekosistem Laut</span>
+        <span class="speaker-pill presenter-only">Presenter 4: Alegra Tolande</span>
       </div>
-      <h2 class="slide-title" data-morph="title">Definisi & Faktor <span>Ekosistem Laut</span></h2>
-      <div class="narrative-box" data-morph="narrative">
-        <strong>Ekosistem laut adalah ekosistem perairan asin yang meliputi wilayah laut dangkal sampai laut dalam.</strong> Dinamika kehidupan di laut dipengaruhi oleh faktor salinitas, suhu, kedalaman, cahaya matahari, arus, gelombang, dan kadar oksigen terlarut.
-      </div>
-      <div class="point-card" data-morph="card-1">
-        <div class="point-title">
-          <svg class="icon-svg-lg" style="color: var(--accent-cyan);" viewBox="0 0 24 24"><path d="M10 2v7.31"/><path d="M14 9.3V2"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
-          Komposisi Organisme Laut:
+      <h2 class="slide-title" data-morph="title">Karakteristik <span>Ekosistem Laut</span></h2>
+      <div class="evidence-grid">
+        <div>
+          <div class="narrative-box" data-morph="narrative">
+            <strong>Ekosistem perairan asin terluas di bumi.</strong> Memiliki salinitas tinggi (~35 ppt), mencakup wilayah laut dangkal hingga palung laut dalam.
+          </div>
+          <div class="stat-badge-container">
+            <div class="stat-pill-item"><div class="stat-num">590 Spesies</div><div class="stat-desc">Terumbu Karang Indonesia (76% Karang Dunia)</div></div>
+            <div class="stat-pill-item"><div class="stat-num">12.54 Juta Ton</div><div class="stat-desc">Produksi Perikanan Laut Indonesia / Tahun</div></div>
+          </div>
         </div>
-        <div class="point-desc" style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.7; margin-top: 4px;">
-          • <strong>Produsen:</strong> Fitoplankton dan alga.<br>
-          • <strong>Konsumen:</strong> Ikan, kerang, penyu, hiu, dan paus.<br>
-          • <strong>Pengurai:</strong> Bakteri dan jamur laut.
+        <div class="evidence-box" data-morph="card-1">
+          <div class="evidence-img-wrapper">
+            <img id="img_slide8" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" alt="Terumbu Karang Raja Ampat" class="evidence-img">
+            <span class="evidence-tag">Coral Triangle</span>
+          </div>
+          <div class="evidence-caption">
+            <div id="cap_slide8"><strong>Terumbu Karang Raja Ampat (Indonesia)</strong></div>
+            <p style="font-size: 0.8rem; margin-top: 3px;">Pusat keanekaragaman hayati laut dunia pendukung utama rantai makanan tropis.</p>
+            <div class="source-citation" id="src_slide8">Sumber: KKP RI & Coral Triangle Initiative (CTI)</div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 9: Manfaat Ekosistem Laut -->
+    <!-- SLIDE 9: Marine Benefits -->
     <section class="slide" data-slide="9" data-speaker="Alegra Tolande" data-nim="2511102442171">
       <div class="slide-badge-wrapper" data-morph="badge-wrapper">
-        <span class="tag-category" data-morph="tag">
-          <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/></svg>
-          Dukungan Kehidupan Global
-        </span>
-        <span class="speaker-pill presenter-only">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg>
-          Presenter 4: Alegra Tolande
-        </span>
+        <span class="tag-category" data-morph="tag">Manfaat Laut</span>
+        <span class="speaker-pill presenter-only">Presenter 4: Alegra Tolande</span>
       </div>
-      <h2 class="slide-title" data-morph="title">Manfaat <span>Ekosistem Laut</span></h2>
-      <p style="color: #cbd5e1; font-size: 1rem; margin-bottom: 14px;" data-morph="lead">
-        Laut memainkan peran strategis dalam mendukung biosfer dan kehidupan manusia:
-      </p>
+      <h2 class="slide-title" data-morph="title">Peran Global <span>Ekosistem Laut</span></h2>
       <div class="grid-points grid-3">
-        <div class="point-card" data-morph="card-1">
-          <div class="point-title">
-            <svg class="icon-svg-lg" style="color: var(--accent-emerald);" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-            Sumber Pangan & Garam
-          </div>
-          <div class="point-desc">
-            Bermanfaat sebagai sumber pangan utama, terutama ikan, udang, kerang, rumput laut, dan kristalisasi garam.
-          </div>
-        </div>
-        <div class="point-card" data-morph="card-2">
-          <div class="point-title">
-            <svg class="icon-svg-lg" style="color: var(--accent-cyan);" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-            Oksigen & Pengatur Iklim
-          </div>
-          <div class="point-desc">
-            Membantu menghasilkan oksigen melalui fotosintesis fitoplankton, serta menyerap karbon untuk mengatur suhu iklim bumi.
-          </div>
-        </div>
-        <div class="point-card" data-morph="card-3">
-          <div class="point-title">
-            <svg class="icon-svg-lg" style="color: var(--accent-blue);" viewBox="0 0 24 24"><path d="M2 20h20"/><path d="M5 20c0-4 3-7 7-7s7 3 7 7"/><path d="M12 13V4"/><polygon points="12 4 17 8 12 8 12 4"/></svg>
-            Transportasi & Riset
-          </div>
-          <div class="point-desc">
-            Menjadi jalur transportasi pelayaran dan perdagangan internasional, wisata bahari, serta wadah penelitian ilmiah.
-          </div>
-        </div>
+        <div class="point-card" data-morph="card-1"><div class="point-title">1. Pangan & Garam</div><div class="point-desc">Penyedia protein utama (ikan, cumi, udang) dan hasil kristalisasi garam dapur.</div></div>
+        <div class="point-card" data-morph="card-2"><div class="point-title">2. Oksigen & Pengatur Iklim</div><div class="point-desc">Fitoplankton laut menghasilkan >50% oksigen bumi dan menyerap emisi karbon.</div></div>
+        <div class="point-card" data-morph="card-3"><div class="point-title">3. Pelayaran & Riset</div><div class="point-desc">Jalur utama perdagangan antar-pulau/dunia serta obyek penelitian ilmiah.</div></div>
       </div>
     </section>
 
-    <!-- SLIDE 10: Sumber Daya Energi Laut (Splits into Physical & Bioenergy) -->
+    <!-- SLIDE 10: Energy Resources -->
     <section class="slide" data-slide="10" data-speaker="Adit Anugrah" data-nim="2511102442173">
       <div class="slide-badge-wrapper" data-morph="badge-wrapper">
-        <span class="tag-category" data-morph="tag">
-          <svg class="icon-svg" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          Potensi Maritim Nasional
-        </span>
-        <span class="speaker-pill presenter-only">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg>
-          Presenter 5: Adit Anugrah
-        </span>
+        <span class="tag-category" data-morph="tag">Poin 3: SDA Energi Laut (EBT)</span>
+        <span class="speaker-pill presenter-only">Presenter 5: Adit Anugrah</span>
       </div>
-      <h2 class="slide-title" data-morph="title">Potensi <span>Sumber Daya Energi Laut</span></h2>
-      <div class="narrative-box" data-morph="narrative">
-        <strong>Laut memiliki potensi besar sebagai sumber energi terbarukan.</strong> Potensi ini sangat penting bagi Indonesia karena Indonesia merupakan negara kepulauan dengan wilayah laut yang luas.
-      </div>
-      <div class="grid-points grid-2">
-        <div class="point-card" data-morph="card-1">
-          <div class="point-title">
-            <svg class="icon-svg-lg" style="color: var(--accent-gold);" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-            Sumber Energi Fisik Laut
+      <h2 class="slide-title" data-morph="title">Potensi <span>SDA Energi Laut</span></h2>
+      <div class="evidence-grid">
+        <div>
+          <div class="narrative-box" data-morph="narrative">
+            <strong>Sumber energi baru terbarukan (EBT) melimpah.</strong> Memanfaatkan gerakan mekanis perairan laut serta biomassa mikroalga tanpa menghasilkan emisi gas rumah kaca.
           </div>
-          <div class="point-desc">
-            Energi laut dapat berasal dari gelombang, pasang surut, arus laut, angin lepas pantai (*offshore*), dan perbedaan suhu air laut (OTEC).
+          <div class="stat-badge-container">
+            <div class="stat-pill-item"><div class="stat-num">60 GW</div><div class="stat-desc">Potensi Energi Laut Indonesia (Gelombang + Arus + OTEC)</div></div>
+            <div class="stat-pill-item"><div class="stat-num">&lt; 0,01%</div><div class="stat-desc">Tingkat Pemanfaatan Saat Ini (Peluang Besar)</div></div>
           </div>
         </div>
-        <div class="point-card" data-morph="card-2">
-          <div class="point-title">
-            <svg class="icon-svg-lg" style="color: var(--accent-emerald);" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg>
-            Bioenergi Nabati Laut
+        <div class="evidence-box" data-morph="card-1">
+          <div class="evidence-img-wrapper">
+            <img id="img_slide10" src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=800&q=80" alt="Pembangkit Energi Laut" class="evidence-img">
+            <span class="evidence-tag">EBT Maritim</span>
           </div>
-          <div class="point-desc">
-            Alga dan rumput laut juga dapat dibudidayakan dan dimanfaatkan secara berkelanjutan sebagai bahan baku bioenergi ramah lingkungan.
+          <div class="evidence-caption">
+            <div id="cap_slide10"><strong>Pembangkit Energi Terbarukan Lepas Pantai</strong></div>
+            <p style="font-size: 0.8rem; margin-top: 3px;">Teknologi kinetik arus laut & angin lepas pantai (salah satu lokasi uji coba: Selat Larantuka NTT).</p>
+            <div class="source-citation" id="src_slide10">Sumber: Kementerian ESDM RI (Grand Strategi Energi)</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 11: Ancaman Ekosistem (Dynamic threat fracture pulse) -->
+    <!-- SLIDE 11: Ecosystem Threats -->
     <section class="slide" data-slide="11" data-speaker="Wahyudin" data-nim="2511102442189">
       <div class="slide-badge-wrapper" data-morph="badge-wrapper">
-        <span class="tag-category" data-morph="tag" style="color: var(--accent-coral); border-color: rgba(255,82,82,0.3); background: rgba(255,82,82,0.1);">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          Krisis dan Tekanan Lingkungan
-        </span>
-        <span class="speaker-pill presenter-only">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg>
-          Presenter 6: Wahyudin
-        </span>
+        <span class="tag-category" data-morph="tag" style="color: var(--accent-coral); border-color: rgba(255,82,82,0.35); background: rgba(255,82,82,0.12);">Ancaman Lingkungan</span>
+        <span class="speaker-pill presenter-only">Presenter 6: Wahyudin</span>
       </div>
-      <h2 class="slide-title" data-morph="title">Ancaman <span>Ekosistem Pesisir dan Laut</span></h2>
-      <p style="color: #cbd5e1; font-size: 1rem; margin-bottom: 14px;" data-morph="lead">
-        Ekosistem pantai, estuari, dan laut menghadapi berbagai ancaman nyata:
-      </p>
-      <div class="grid-points grid-3">
-        <div class="point-card alert-threat" data-morph="card-1">
-          <div class="point-title">
-            <svg class="icon-svg-lg" style="color: var(--accent-coral);" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            Polusi & Limbah
+      <h2 class="slide-title" data-morph="title">Ancaman <span>Pesisir & Laut</span></h2>
+      <div class="evidence-grid">
+        <div>
+          <div class="grid-points">
+            <div class="point-card" data-morph="card-1" style="border-color: rgba(255,82,82,0.4); background: rgba(38,12,18,0.75);">
+              <div class="point-title">Polusi Sampah & Limbah</div>
+              <div class="point-desc">Sampah plastik mikro, tumpahan minyak, dan limbah kimia industri.</div>
+            </div>
+            <div class="point-card" data-morph="card-2" style="border-color: rgba(255,82,82,0.4); background: rgba(38,12,18,0.75);">
+              <div class="point-title">Eksploitasi Destruktif</div>
+              <div class="point-desc">Overfishing, penggunaan bom ikan, dan pembabatan hutan mangrove.</div>
+            </div>
           </div>
-          <div class="point-desc">
-            Sampah plastik, limbah buangan rumah tangga, limbah industri kimiawi, serta pencemaran tumpahan minyak mentah.
-          </div>
-        </div>
-        <div class="point-card alert-threat" data-morph="card-2">
-          <div class="point-title">
-            <svg class="icon-svg-lg" style="color: var(--accent-coral);" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-            Eksploitasi Destruktif
-          </div>
-          <div class="point-desc">
-            Penangkapan ikan berlebihan (*overfishing*), serta penggunaan bahan peledak (bom) atau racun kimia perusak biota.
+          <div class="stat-badge-container">
+            <div class="stat-pill-item" style="border-color: rgba(255,82,82,0.45);"><div class="stat-num" style="color: var(--accent-coral);">0,59 Juta Ton</div><div class="stat-desc">Sampah Plastik Masuk Laut Indonesia / Tahun</div></div>
           </div>
         </div>
-        <div class="point-card alert-threat" data-morph="card-3">
-          <div class="point-title">
-            <svg class="icon-svg-lg" style="color: var(--accent-coral);" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
-            Kerusakan Habitat & Iklim
+        <div class="evidence-box" data-morph="card-3">
+          <div class="evidence-img-wrapper">
+            <img id="img_slide11" src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?auto=format&fit=crop&w=800&q=80" alt="Sampah Plastik Laut" class="evidence-img">
+            <span class="evidence-tag" style="border-color: var(--accent-coral); color: var(--accent-coral);">Fakta Kerusakan</span>
           </div>
-          <div class="point-desc">
-            Penebangan liar hutan mangrove, kerusakan terumbu karang, reklamasi yang tidak terkendali, serta dampak perubahan iklim.
+          <div class="evidence-caption">
+            <div id="cap_slide11"><strong>Pencemaran Sampah Plastik di Perairan Laut</strong></div>
+            <p style="font-size: 0.8rem; margin-top: 3px;">Mikroplastik termakan biota laut dan merusak rantai makanan manusia.</p>
+            <div class="source-citation" id="src_slide11">Sumber: Riset BRIN & TKN Penanganan Sampah Laut (2023)</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 12: Upaya Pelestarian (Emerald bloom restoration) -->
+    <!-- SLIDE 12: Conservation -->
     <section class="slide" data-slide="12" data-speaker="Muchammad Rizky Ramadhani" data-nim="2511102442203">
       <div class="slide-badge-wrapper" data-morph="badge-wrapper">
-        <span class="tag-category" data-morph="tag" style="color: var(--accent-emerald); border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.1);">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Tindakan Nyata & Solusi
-        </span>
-        <span class="speaker-pill presenter-only">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg>
-          Presenter 7: Muchammad Rizky Ramadhani
-        </span>
+        <span class="tag-category" data-morph="tag" style="color: var(--accent-emerald); border-color: rgba(16,185,129,0.35); background: rgba(16,185,129,0.12);">Solusi Pelestarian</span>
+        <span class="speaker-pill presenter-only">Presenter 7: Muchammad Rizky Ramadhani</span>
       </div>
       <h2 class="slide-title" data-morph="title">Upaya <span>Pelestarian Lingkungan</span></h2>
       <div class="grid-points grid-3">
-        <div class="point-card alert-solution" data-morph="card-1">
-          <div class="point-title">
-            <svg class="icon-svg-lg" style="color: var(--accent-emerald);" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-            Kurangi Sampah & Limbah
-          </div>
-          <div class="point-desc">
-            Mengurangi pemakaian plastik sekali pakai, tidak membuang sampah ke sungai dan laut, serta mengolah limbah sebelum dibuang.
-          </div>
+        <div class="point-card" data-morph="card-1" style="border-color: rgba(16,185,129,0.4); background: rgba(6,34,25,0.75);">
+          <div class="point-title">1. Pengurangan Plastik & Limbah</div>
+          <div class="point-desc">Menghentikan buang sampah ke sungai/laut dan mengolah limbah sebelum dibuang.</div>
         </div>
-        <div class="point-card alert-solution" data-morph="card-2">
-          <div class="point-title">
-            <svg class="icon-svg-lg" style="color: var(--accent-emerald);" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg>
-            Konservasi & Praktik Ramah
-          </div>
-          <div class="point-desc">
-            Menanam dan menjaga mangrove, melindungi terumbu karang, menggunakan alat tangkap ramah lingkungan, dan mendukung kawasan konservasi laut.
-          </div>
+        <div class="point-card" data-morph="card-2" style="border-color: rgba(16,185,129,0.4); background: rgba(6,34,25,0.75);">
+          <div class="point-title">2. Reboisasi & Alat Ramah</div>
+          <div class="point-desc">Penanaman mangrove, perlindungan karang, dan pelarangan pukat harimau/bom.</div>
         </div>
-        <div class="point-card alert-solution" data-morph="card-3">
-          <div class="point-title">
-            <svg class="icon-svg-lg" style="color: var(--accent-emerald);" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-            Tata Ruang & AMDAL
-          </div>
-          <div class="point-desc">
-            Pembangunan di seluruh wilayah pesisir wajib secara ketat memperhatikan dampak lingkungan melalui instrumen AMDAL.
-          </div>
+        <div class="point-card" data-morph="card-3" style="border-color: rgba(16,185,129,0.4); background: rgba(6,34,25,0.75);">
+          <div class="point-title">3. Penegakan AMDAL & Zonasi</div>
+          <div class="point-desc">Kewajiban AMDAL pada proyek pesisir serta perluasan kawasan konservasi laut.</div>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 13: Kesimpulan (3 Pillars Convergence) -->
+    <!-- SLIDE 13: Summary -->
     <section class="slide" data-slide="13" data-speaker="Muchammad Rizky Ramadhani" data-nim="2511102442203">
       <div class="slide-badge-wrapper" data-morph="badge-wrapper">
-        <span class="tag-category" data-morph="tag">
-          <svg class="icon-svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          Rangkuman Pembahasan
-        </span>
-        <span class="speaker-pill presenter-only">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg>
-          Presenter 7: Muchammad Rizky Ramadhani
-        </span>
+        <span class="tag-category" data-morph="tag">Kesimpulan</span>
+        <span class="speaker-pill presenter-only">Presenter 7: Muchammad Rizky Ramadhani</span>
       </div>
-      <h2 class="slide-title" data-morph="title">Kesimpulan <span>Akhir</span></h2>
-      
+      <h2 class="slide-title" data-morph="title">Rangkuman <span>Tema 7</span></h2>
       <div class="point-card" data-morph="card-1" style="margin-bottom: 12px; border-left: 5px solid var(--accent-cyan);">
-        <div class="point-title" style="color: var(--accent-cyan); font-size: 1.08rem;">
-          <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/></svg>
-          Keterkaitan Antar-Ekosistem
-        </div>
-        <div class="point-desc" style="color: #e2e8f0; font-size: 0.96rem;">
-          Ekosistem pantai, estuari, dan laut merupakan ekosistem yang saling berkaitan dan sangat penting bagi kehidupan di bumi.
-        </div>
+        <div class="point-title" style="color: var(--accent-cyan);">1. Keterkaitan Tiga Ekosistem</div>
+        <div class="point-desc">Ekosistem pantai, estuari, dan laut saling terhubung dan menjadi penyokong biosfer utama bumi.</div>
       </div>
-      
       <div class="point-card" data-morph="card-2" style="margin-bottom: 12px; border-left: 5px solid var(--accent-emerald);">
-        <div class="point-title" style="color: var(--accent-emerald); font-size: 1.08rem;">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg>
-          Fungsi Ekologis & Potensi Ekonomi
-        </div>
-        <div class="point-desc" style="color: #e2e8f0; font-size: 0.96rem;">
-          Ketiganya menyediakan habitat bagi berbagai makhluk hidup, sumber pangan, perlindungan bagi wilayah pesisir, serta peluang ekonomi dan energi terbarukan.
-        </div>
+        <div class="point-title" style="color: var(--accent-emerald);">2. Potensi SDA Energi Melimpah</div>
+        <div class="point-desc">Laut menyimpan potensi energi bersih (gelombang, arus, OTEC) yang menjadi solusi transisi energi nasional.</div>
       </div>
-
       <div class="point-card" data-morph="card-3" style="border-left: 5px solid var(--accent-gold);">
-        <div class="point-title" style="color: var(--accent-gold); font-size: 1.08rem;">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Prinsip Berkelanjutan
-        </div>
-        <div class="point-desc" style="color: #e2e8f0; font-size: 0.96rem;">
-          Oleh karena itu, sumber daya pesisir dan laut harus dimanfaatkan secara bijak dan berkelanjutan agar tetap dapat dinikmati oleh generasi masa kini dan masa depan.
-        </div>
+        <div class="point-title" style="color: var(--accent-gold);">3. Komitmen Berkelanjutan</div>
+        <div class="point-desc">Pemanfaatan SDA energi harus sejalan dengan aksi konservasi ketat demi keberlanjutan generasi mendatang.</div>
       </div>
     </section>
 
-    <!-- SLIDE 14: Sesi Tanya Jawab & Penutup (Polos & Terpusat di Tengah) -->
+    <!-- SLIDE 14: QnA Closing -->
     <section class="slide slide-center" data-slide="14" data-speaker="Muchammad Rizky Ramadhani" data-nim="2511102442203">
       <div class="slide-badge-wrapper" data-morph="badge-wrapper">
-        <span class="tag-category" data-morph="tag">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          Sesi Diskusi & Penutup
-        </span>
-        <span class="speaker-pill presenter-only">
-          <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg>
-          Presenter 7: Muchammad Rizky Ramadhani
-        </span>
+        <span class="tag-category" data-morph="tag">Sesi Diskusi & Penutup</span>
+        <span class="speaker-pill presenter-only">Presenter 7: Muchammad Rizky Ramadhani</span>
       </div>
-
-      <h1 class="slide-title-hero" data-morph="title" style="font-size: clamp(2.8rem, 6vw, 4.4rem); margin-bottom: 12px;">
-        Terima Kasih!
-      </h1>
-
+      <h1 class="slide-title-hero" data-morph="title" style="font-size: clamp(2.8rem, 6vw, 4.4rem); margin-bottom: 12px;">Terima Kasih!</h1>
       <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.4rem, 2.8vw, 2.1rem); color: var(--accent-cyan); font-weight: 700; margin-bottom: 18px;">
         Sesi Diskusi & Tanya Jawab
       </h2>
-
       <p class="lead-text" data-morph="lead" style="font-size: clamp(1rem, 2vw, 1.2rem); max-width: 820px; line-height: 1.8; margin-bottom: 28px;">
-        Pemaparan materi dari <strong>Kelompok 9</strong> telah selesai. Kami mengundang tanggapan, masukan, dan pertanyaan dari dosen pengampu, <strong>Bu ANDI DARAMUSSENG</strong>, serta rekan-rekan mahasiswa sekalian.
+        Pemaparan materi <strong>Tema 7</strong> dari <strong>Kelompok 9</strong> telah selesai. Kami mengundang masukan dan pertanyaan dari dosen pengampu, <strong>Bu ANDI DARAMUSSENG</strong>, serta rekan-rekan mahasiswa sekalian.
       </p>
-
-      <div style="padding: 12px 24px; background: rgba(12,25,46,0.8); border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 14px; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 10px 25px rgba(0, 242, 254, 0.1);" data-morph="team-box">
-        <svg class="icon-svg" style="color: var(--accent-cyan);" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <div style="padding: 12px 24px; background: rgba(12,25,46,0.8); border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 14px; display: inline-flex; align-items: center; gap: 10px;">
         <span style="font-size: 0.92rem; color: #f1f5f9; font-weight: 600;">Kelompok 9 • Efraim • Fadhil • Riyas • Alegra • Adit • Wahyudin • Rizky</span>
       </div>
     </section>
@@ -1614,90 +1316,141 @@
         <span id="scriptBadge">Presenter 1</span>
         <h4 id="scriptSpeaker">Efraim Ceme (2511102442042)</h4>
       </div>
-      <div class="teleprompter-controls">
-        <!-- Tombol Khusus Membuka Lembar Jawaban Q&A -->
-        <button class="btn-qna-tab" id="btnOpenQnAModal" title="Buka Jendela Contekan Jawaban Q&A">
-          <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          <span>Bank Jawaban Q&A</span>
-        </button>
-        <button class="btn-icon" id="btnFontDown" style="padding: 4px 8px;" title="Perkecil Font">A-</button>
-        <button class="btn-icon" id="btnFontUp" style="padding: 4px 8px;" title="Perbesar Font">A+</button>
-        <button class="btn-icon" id="btnCloseScript" style="padding: 4px 8px;" title="Tutup Naskah">
+      <div style="display: flex; gap: 6px; align-items: center;">
+        <button class="btn-icon" id="btnOpenQnAModal" style="border-color: var(--accent-gold); color: var(--accent-gold);" title="Buka Jendela Contekan Jawaban Q&A">Bank Jawaban Q&A</button>
+        <button class="btn-icon" id="btnFontDown" style="padding: 4px 8px;">A-</button>
+        <button class="btn-icon" id="btnFontUp" style="padding: 4px 8px;">A+</button>
+        <button class="btn-icon" id="btnCloseScript" style="padding: 4px 8px;">
           <svg class="icon-svg" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
       </div>
     </div>
-    
-    <!-- Tampilan Teks Naskah Slide -->
     <div class="teleprompter-text" id="scriptContent"></div>
   </aside>
 
-  <!-- TEMPAT KHUSUS: Modal Jendela Bank Jawaban Q&A (Terpisah agar tidak membingungkan) -->
+  <!-- Google Apps Script & Custom Image Modal -->
+  <div class="sheet-modal-overlay" id="sheetModal">
+    <div class="sheet-modal-card">
+      <div class="sheet-modal-header">
+        <h3 style="color: #fff; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
+          <svg class="icon-svg" style="color: var(--accent-emerald);" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Google Apps Script & Custom Image Config
+        </h3>
+        <button class="btn-icon" id="btnCloseSheetModal">
+          <svg class="icon-svg" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="sheet-modal-body">
+        <div style="background: rgba(12, 25, 46, 0.9); padding: 16px; border-radius: 12px; border: 1px solid rgba(0,242,254,0.3);">
+          <h4 style="font-size: 0.95rem; color: var(--accent-cyan); margin-bottom: 8px;">1. Koneksi Google Apps Script Web App URL</h4>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5;">
+            URL Web App dari `setup.gs` telah terintegrasi secara otomatis sebagai koneksi utama Google Spreadsheet.
+          </p>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <input type="url" id="webAppUrlInput" class="form-input" style="flex: 1; min-width: 250px;" value="https://script.google.com/macros/s/AKfycbzAvV16xYS4PLs2JlV9lAcxsvyS__SYLFp2S1h-pPeOlG4LCV2jiQMicGL9hrsKmbQEmw/exec" placeholder="https://script.google.com/macros/s/.../exec">
+            <button class="btn-submit" id="btnSaveWebAppUrl">Simpan URL</button>
+            <button class="btn-submit" id="btnSyncFromSheet" style="background: linear-gradient(135deg, var(--accent-emerald), var(--accent-cyan));">
+              <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+              Sync Sheet
+            </button>
+          </div>
+        </div>
+
+        <div style="background: rgba(12, 25, 46, 0.9); padding: 16px; border-radius: 12px; border: 1px solid rgba(255,209,102,0.3);">
+          <h4 style="font-size: 0.95rem; color: var(--accent-gold); margin-bottom: 8px;">2. Update / Upload Custom Foto Per Slide</h4>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+            <div class="form-group">
+              <label class="form-label">Pilih Target Slide</label>
+              <select id="slideTargetSelect" class="form-input">
+                <option value="slide4">Slide 4 - Ekosistem Pantai</option>
+                <option value="slide6">Slide 6 - Ekosistem Estuari</option>
+                <option value="slide8">Slide 8 - Ekosistem Laut</option>
+                <option value="slide10">Slide 10 - SDA Energi Laut</option>
+                <option value="slide11">Slide 11 - Ancaman Lingkungan</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Pilih Foto dari Galeri (Lokal)</label>
+              <input type="file" id="customFileGalleryInput" accept="image/*" class="form-input" style="padding: 6px 10px;">
+            </div>
+            <div class="form-group" style="grid-column: span 2;">
+              <label class="form-label">Atau Masukkan URL Foto Baru (Unsplash/Direct Image)</label>
+              <input type="url" id="customImageUrlInput" class="form-input" placeholder="https://images.unsplash.com/...">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Keterangan / Caption Foto</label>
+              <input type="text" id="customCaptionInput" class="form-input" placeholder="misal: Vegetasi Mangrove Teluk Balikpapan">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Sumber Rujukan Data</label>
+              <input type="text" id="customSourceInput" class="form-input" placeholder="misal: Sumber: Dinas Lingkungan Hidup (2023)">
+            </div>
+          </div>
+
+          <div id="galleryPreviewBox" style="margin-top: 12px; display: none; background: rgba(2,7,19,0.85); border: 1px dashed var(--accent-cyan); border-radius: 12px; padding: 12px; text-align: center; transition: all 0.3s ease;">
+            <div style="font-size: 0.75rem; color: var(--accent-cyan); font-weight: 800; margin-bottom: 6px; letter-spacing: 0.5px;">
+              PREVIEW FOTO PILIHAN (MENYESUAIKAN PROPORSIONAL LAYAR SLIDE)
+            </div>
+            <div style="width: 100%; max-height: 180px; overflow: hidden; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: #000;">
+              <img id="imgGalleryPreview" src="" alt="Preview Foto Galeri" style="max-height: 180px; width: 100%; object-fit: cover; transition: transform 0.3s ease;">
+            </div>
+          </div>
+
+          <button class="btn-submit" id="btnApplyCustomImage" style="margin-top: 14px; width: 100%;">
+            Terapkan Foto & Kirim ke Google Sheet
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QnA Modal -->
   <div class="qna-modal-overlay" id="qnaModal">
     <div class="qna-modal-card">
       <div class="qna-modal-header">
-        <h3>
+        <h3 style="color: #fff; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
           <svg class="icon-svg" style="color: var(--accent-gold);" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           Bank Contekan Jawaban Q&A (Kelompok 9)
         </h3>
-        <button class="btn-icon" id="btnCloseQnAModal" style="padding: 6px 12px;">
+        <button class="btn-icon" id="btnCloseQnAModal">
           <svg class="icon-svg" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-          Tutup (Esc)
         </button>
       </div>
 
-      <!-- Filter Kategori Khusus -->
       <div class="qna-filter-bar">
-        <button class="qna-filter-btn active" data-filter="all">Semua Pertanyaan (5)</button>
-        <button class="qna-filter-btn" data-filter="lecturer">Khusus Dosen (2)</button>
-        <button class="qna-filter-btn" data-filter="student">Pertanyaan Mahasiswa (3)</button>
+        <button class="qna-filter-btn active" data-filter="all">Semua Pertanyaan</button>
+        <button class="qna-filter-btn" data-filter="lecturer">Khusus Dosen</button>
+        <button class="qna-filter-btn" data-filter="student">Pertanyaan Mahasiswa</button>
       </div>
 
-      <!-- Wadah Pertanyaan & Jawaban -->
       <div class="qna-modal-body" id="qnaListContainer"></div>
     </div>
   </div>
 
-  <footer>
-    <div class="progress-track">
-      <div class="progress-bar" id="progressBar"></div>
-    </div>
-    <div class="footer-left">
-      <div class="slide-counter">Slide <span id="currentSlideNum">01</span> / 14</div>
-      
-      <!-- Live Presentation Stopwatch for Presenter Mode -->
-      <div class="timer-badge" id="presentationTimer" title="Stopwatch Waktu Presentasi">
-        <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <span id="timerDisplay">00:00</span>
-      </div>
-
-      <div class="current-presenter-badge presenter-only">
-        <span class="dot"></span>
-        <span id="activePresenterName">Efraim Ceme</span>
-      </div>
-    </div>
-    <div class="nav-buttons">
-      <button class="btn-nav" id="btnPrev" disabled>
-        <svg class="icon-svg" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-        <span class="hide-mobile">Sebelumnya</span>
-      </button>
-      <button class="btn-nav" id="btnNext">
-        <span class="hide-mobile">Selanjutnya</span>
-        <svg class="icon-svg" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </button>
-    </div>
-  </footer>
-
+  <!-- Overview Modal -->
   <div class="overview-modal" id="overviewModal">
     <div class="overview-header">
       <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; color: #fff;">Daftar Slide Presentasi</h2>
       <button class="btn-icon" id="btnCloseOverview">
         <svg class="icon-svg" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        Tutup (Esc)
       </button>
     </div>
     <div class="overview-grid" id="overviewGrid"></div>
   </div>
+
+  <footer>
+    <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+    <div class="footer-left">
+      <div class="slide-counter">Slide <span id="currentSlideNum">01</span> / 14</div>
+      <!-- Timer & Presenter Badge with strict presenter-only guard -->
+      <div class="timer-badge presenter-only" id="presentationTimer"><span id="timerDisplay">00:00</span></div>
+      <div class="current-presenter-badge presenter-only"><span class="dot"></span><span id="activePresenterName">Efraim Ceme</span></div>
+    </div>
+    <div class="nav-buttons">
+      <button class="btn-nav" id="btnPrev" disabled>Sebelumnya</button>
+      <button class="btn-nav" id="btnNext">Selanjutnya</button>
+    </div>
+  </footer>
 
   <script>
     const scriptsData = {
@@ -1705,85 +1458,85 @@
         speaker: "Efraim Ceme",
         nim: "2511102442042",
         role: "Presenter 1 (Membuka & Pengantar)",
-        text: `"Selamat pagi/siang kepada Bapak/Ibu dosen pengampu kita, <strong>Bu ANDI DARAMUSSENG</strong>, serta rekan-rekan sekalian. Kami dari Kelompok 9 mata kuliah Pengantar Ilmu Lingkungan hari ini akan mempresentasikan materi mengenai Ekosistem Pantai, Estuari, Ekosistem Laut, serta Sumber Daya Alam Energi.<br><span class='cue'>[Lanjut ke Slide 2 untuk perkenalan anggota kelompok]</span>"`
+        text: `"Selamat pagi/siang kepada dosen pengampu kita, <strong>Bu ANDI DARAMUSSENG</strong>, serta teman-teman sekalian.<br><br>Kami dari <strong>Kelompok 9</strong> hari ini membawakan materi <strong>Tema 7</strong>, yaitu <em>Ekosistem Pantai, Estuari, Ekosistem Laut, dan Potensi SDA Energi</em>.<br><span class='cue'>[Cue: Klik Selanjutnya untuk kenalan anggota]</span>"`
       },
       2: {
         speaker: "Efraim Ceme",
         nim: "2511102442042",
         role: "Presenter 1 (Memperkenalkan Anggota)",
-        text: `"Kelompok kami beranggotakan tujuh orang, yaitu saya sendiri Efraim Ceme, rekan saya Ahmad Fadhil Naufal, Muhammad Riyas, Alegra Tolande, Adit Anugrah, Wahyudin, dan Muchammad Rizky Ramadhani.<br><span class='cue'>[Pindah ke Slide 3 untuk baca konsep ekosistem]</span>"`
+        text: `"Tim Kelompok 9 beranggotakan 7 orang: Saya sendiri <strong>Efraim</strong>, dilanjutkan <strong>Fadhil</strong>, <strong>Riyas</strong>, <strong>Alegra</strong>, <strong>Adit</strong>, <strong>Wahyudin</strong>, dan <strong>Rizky</strong>.<br><span class='cue'>[Cue: Lanjut Slide 3 untuk masuk konsep]</span>"`
       },
       3: {
         speaker: "Efraim Ceme",
         nim: "2511102442042",
         role: "Presenter 1 (Konsep Dasar Ekosistem)",
-        text: `"(Baca teks slide):<br>Ekosistem adalah hubungan timbal balik antara makhluk hidup dengan lingkungan sekitarnya. Dalam ekosistem terdapat <strong>komponen biotik</strong>, seperti tumbuhan, hewan, manusia, dan mikroorganisme, serta <strong>komponen abiotik</strong>, seperti air, cahaya matahari, suhu, tanah, pasir, dan salinitas. Semua komponen tersebut saling berinteraksi sehingga terjadi aliran energi dan daur materi.<br><br>Selanjutnya, penjelasan mengenai <strong>Ekosistem Pantai</strong> akan dibacakan oleh rekan saya, <strong>Fadhil</strong>."`
+        text: `"Sebelum masuk ke tiga ekosistem utama, mari kita pahami apa itu <strong>Ekosistem</strong>.<br><br>Ekosistem adalah <em>hubungan timbal balik antara makhluk hidup dan lingkungan fisiknya</em>.<br>Komponennya ada dua: <strong>Biotik</strong> (seperti tumbuhan, hewan, dan mikroba) serta <strong>Abiotik</strong> (seperti air, tanah, dan cahaya).<br><br>Selanjutnya materi Ekosistem Pantai dijelaskan oleh <strong>Fadhil</strong>."`
       },
       4: {
         speaker: "Ahmad Fadhil Naufal",
         nim: "2511102442194",
         role: "Presenter 2 (Ekosistem Pantai)",
-        text: `"Terima kasih Efraim. Saya akan melanjutkan pembacaan materi ekosistem pantai.<br><br>(Baca teks slide):<br><strong>Ekosistem pantai</strong> adalah wilayah pertemuan antara daratan dan laut. Ekosistem ini dipengaruhi oleh pasang surut, gelombang, arus laut, angin, cahaya matahari, dan kondisi tanah atau pasir. Contoh ekosistem pantai adalah pantai berpasir, pantai berbatu, hutan mangrove, padang lamun, dan terumbu karang.<br><span class='cue'>[Lanjut ke Slide 5 untuk fungsi pantai]</span>"`
+        text: `"Terima kasih Efraim. Subtopik pertama kita adalah <strong>Ekosistem Pantai</strong>.<br><br>Pantai adalah <em>wilayah perbatasan antara darat dan laut</em>.<br>Berdasarkan data <strong>KLHK 2023</strong>, Indonesia memiliki 3,36 juta hektar hutan mangrove—yaitu 20% dari total mangrove dunia. Seperti foto di layar, akar mangrove berfungsi sebagai peredam alami abrasi dan banjir rob.<br><span class='cue'>[Cue: Lanjut Slide 5 fungsi pantai]</span>"`
       },
       5: {
         speaker: "Ahmad Fadhil Naufal",
         nim: "2511102442194",
         role: "Presenter 2 (Fungsi Ekosistem Pantai)",
-        text: `"(Baca teks slide):<br>Ekosistem pantai memiliki fungsi penting bagi organisme dan manusia. Pantai menjadi tempat hidup, mencari makan, berkembang biak, dan berlindung bagi ikan, udang, kepiting, kerang, serta burung laut. Ekosistem pantai juga membantu melindungi daratan dari abrasi, gelombang besar, dan banjir rob. Selain itu, pantai menyediakan sumber pangan, lokasi wisata, dan mata pencaharian bagi masyarakat pesisir.<br><br>Untuk materi <strong>ekosistem estuari</strong>, akan dibacakan oleh rekan saya, <strong>Riyas</strong>."`
+        text: `"Ada tiga fungsi utama pantai yang perlu kita ingat:<br><br>1. <strong>Habitat Biota</strong> bagi udang, kepiting, dan kerang.<br>2. <strong>Pelindung Daratan</strong> dari ancaman gelombang pasang.<br>3. <strong>Perekonomian</strong> melalui pariwisata dan pertambakan.<br><br>Selanjutnya, materi Ekosistem Estuari dibawakan oleh <strong>Riyas</strong>."`
       },
       6: {
         speaker: "Muhammad Riyas",
         nim: "2511102442066",
         role: "Presenter 3 (Ekosistem Estuari)",
-        text: `"Terima kasih Fadhil. Berikutnya adalah ekosistem estuari.<br><br>(Baca teks slide):<br><strong>Estuari</strong> adalah daerah pertemuan antara air tawar dari sungai dengan air asin dari laut. Air di daerah estuari disebut air payau karena memiliki kadar garam di antara air tawar dan air laut. Kondisi estuari dapat berubah karena dipengaruhi pasang surut, curah hujan, dan jumlah air sungai yang masuk ke laut. Contoh estuari adalah muara sungai, delta, laguna, dan kawasan mangrove.<br><span class='cue'>[Pindah ke Slide 7 untuk membaca fungsi estuari]</span>"`
+        text: `"Terima kasih Fadhil. Masih di Poin 1 Tema 7, kita membahas <strong>Ekosistem Estuari</strong>.<br><br>Estuari adalah <em>pertemuan air tawar sungai dan air asin laut</em>, sehingga membentuk <strong>Air Payau</strong>.<br>Contoh nyatanya di daerah kita adalah <strong>Delta Mahakam Kaltim</strong> seluas ~107.000 Ha. Sekitar 70% biota pesisir bergantung pada estuari saat masih berupa larva.<br><span class='cue'>[Cue: Lanjut Slide 7 fungsi estuari]</span>"`
       },
       7: {
         speaker: "Muhammad Riyas",
         nim: "2511102442066",
         role: "Presenter 3 (Fungsi Ekosistem Estuari)",
-        text: `"(Baca teks slide):<br>Ekosistem estuari berfungsi sebagai <strong>tempat pembesaran ikan, udang, dan kepiting</strong> sebelum organisme tersebut hidup di laut lepas. Estuari juga menjadi tempat mencari makan dan berlindung dari predator maupun gelombang laut. Selain itu, estuari membantu menyaring sedimen dan sebagian bahan pencemar dari sungai sebelum masuk ke laut. Oleh karena itu, estuari sangat mendukung kegiatan perikanan, tambak, dan kehidupan masyarakat pesisir.<br><br>Selanjutnya, pembahasan mengenai <strong>ekosistem laut</strong> akan dilanjutkan oleh rekan saya, <strong>Alegra</strong>."`
+        text: `"Fungsi penting estuari di antaranya:<br><br>• Sebagai <em>Nursery Ground</em> atau tempat pembesaran bibit ikan dan udang.<br>• Sebagai <strong>Penyaring Sedimen</strong> lumpur sungai sebelum masuk ke laut lepas.<br>• Tempat utama tambak payau masyarakat pesisir.<br><br>Materi Poin 2 yaitu Ekosistem Laut dilanjutkan oleh <strong>Alegra</strong>."`
       },
       8: {
         speaker: "Alegra Tolande",
         nim: "2511102442171",
         role: "Presenter 4 (Ekosistem Laut)",
-        text: `"Terima kasih Riyas. Saya akan membacakan materi ekosistem laut.<br><br>(Baca teks slide):<br><strong>Ekosistem laut</strong> adalah ekosistem perairan asin yang meliputi laut dangkal sampai laut dalam. Kehidupan di laut dipengaruhi oleh salinitas, suhu, kedalaman, cahaya matahari, arus, gelombang, dan oksigen terlarut. Organisme laut terdiri atas produsen seperti fitoplankton dan alga, konsumen seperti ikan, kerang, penyu, hiu, dan paus, serta pengurai seperti bakteri dan jamur.<br><span class='cue'>[Pindah ke Slide 9 untuk manfaat laut]</span>"`
+        text: `"Terima kasih Riyas. Sekarang kita masuk ke Poin 2 Tema 7: <strong>Ekosistem Laut</strong>.<br><br>Laut adalah perairan asin terluas di bumi. Indonesia terletak di jantung <em>Coral Triangle</em> dengan 590 spesies terumbu karang, seperti yang kita lihat pada foto Raja Ampat di layar.<br><span class='cue'>[Cue: Lanjut Slide 9 peran laut]</span>"`
       },
       9: {
         speaker: "Alegra Tolande",
         nim: "2511102442171",
         role: "Presenter 4 (Manfaat Ekosistem Laut)",
-        text: `"(Baca teks slide):<br>Ekosistem laut bermanfaat sebagai <strong>sumber pangan</strong>, terutama ikan, udang, kerang, rumput laut, dan garam. Laut juga membantu menghasilkan oksigen melalui proses fotosintesis yang dilakukan oleh fitoplankton. Selain itu, laut menyerap karbon, membantu mengatur iklim, menjadi jalur transportasi dan perdagangan, serta mendukung kegiatan wisata bahari dan penelitian.<br><br>Materi <strong>sumber daya energi laut</strong> berikutnya akan dibacakan oleh rekan saya, <strong>Adit</strong>."`
+        text: `"Mengapa ekosistem laut sangat penting?<br><br>1. Penyedia <strong>Pangan & Garam</strong> utama.<br>2. <strong>Penghasil Oksigen Global</strong> melalui fotosintesis fitoplankton.<br>3. Jalur <strong>Pelayaran Dunia</strong> dan obyek riset.<br><br>Selanjutnya, Poin 3 tentang SDA Energi Laut disampaikan oleh <strong>Adit</strong>."`
       },
       10: {
         speaker: "Adit Anugrah",
         nim: "2511102442173",
-        role: "Presenter 5 (Sumber Daya Energi Laut)",
-        text: `"Terima kasih Alegra. Selanjutnya adalah potensi energi dari sektor laut.<br><br>(Baca teks slide):<br>Laut memiliki potensi sebagai <strong>sumber energi terbarukan</strong>. Energi laut dapat berasal dari gelombang, pasang surut, arus laut, angin lepas pantai, dan perbedaan suhu air laut. Selain itu, alga dan rumput laut juga dapat dimanfaatkan sebagai bahan bioenergi. Potensi ini penting bagi Indonesia karena Indonesia merupakan negara kepulauan dengan wilayah laut yang luas.<br><br>Materi ancaman terhadap ekosistem pesisir dan laut akan dibacakan oleh rekan saya, <strong>Wahyudin</strong>."`
+        role: "Presenter 5 (SDA Energi Laut)",
+        text: `"Terima kasih Alegra. Poin 3 Tema 7 adalah <strong>SDA Energi Laut</strong>.<br><br>Berdasarkan data <strong>Kementerian ESDM</strong>, potensi Energi Terbarukan Laut Indonesia (seperti energi gelombang, arus laut, dan OTEC) mencapai <strong>60 Gigawatt</strong>!<br>Namun pemanfaatannya saat ini masih di bawah 0,01%, sehingga peluang pengembangannya sangat besar.<br><br>Materi ancaman lingkungan dibawakan oleh <strong>Wahyudin</strong>."`
       },
       11: {
         speaker: "Wahyudin",
         nim: "2511102442189",
         role: "Presenter 6 (Ancaman Ekosistem)",
-        text: `"Terima kasih Adit. Saya akan membacakan berbagai ancaman yang dihadapi ekosistem pesisir dan laut.<br><br>(Baca teks slide):<br>Ekosistem pantai, estuari, dan laut menghadapi berbagai ancaman. Ancaman tersebut antara lain <strong>sampah plastik, limbah rumah tangga, limbah industri, pencemaran minyak</strong>, penangkapan ikan berlebihan, penggunaan bom atau racun ikan, penebangan mangrove, kerusakan terumbu karang, reklamasi yang tidak terkendali, serta perubahan iklim.<br><br>Untuk upaya pelestarian beserta kesimpulan akhir akan disampaikan oleh rekan saya, <strong>Rizky</strong>."`
+        text: `"Terima kasih Adit. Ekosistem pesisir dan laut kita menghadapi ancaman serius.<br><br>Riset <strong>BRIN (2023)</strong> mencatat hingga 0,59 juta ton sampah plastik masuk ke laut Indonesia tiap tahunnya. Selain itu, ada ancaman <em>overfishing</em> dan penggunaan bom ikan.<br><br>Solusi pelestarian dan penutup disampaikan oleh <strong>Rizky</strong>."`
       },
       12: {
         speaker: "Muchammad Rizky Ramadhani",
         nim: "2511102442203",
         role: "Presenter 7 (Upaya Pelestarian)",
-        text: `"Terima kasih Wahyudin. Saya akan melanjutkan ke upaya pelestarian.<br><br>(Baca teks slide):<br>Upaya menjaga ekosistem pesisir dan laut dapat dilakukan dengan mengurangi penggunaan plastik sekali pakai, tidak membuang sampah ke sungai dan laut, serta mengolah limbah sebelum dibuang. Selain itu, masyarakat perlu menanam dan menjaga mangrove, melindungi terumbu karang, menggunakan alat tangkap ikan yang ramah lingkungan, dan mendukung kawasan konservasi laut. Pembangunan di wilayah pesisir juga harus memperhatikan dampak lingkungan.<br><span class='cue'>[Pindah ke Slide 13 untuk kesimpulan]</span>"`
+        text: `"Terima kasih Wahyudin. Langkah nyata yang dapat kita lakukan meliputi:<br><br>1. Mengurangi sampah plastik sekali pakai.<br>2. Reboisasi mangrove dan pelarangan alat tangkap perusak.<br>3. Penegakan izin AMDAL dan kawasan konservasi perairan.<br><span class='cue'>[Cue: Lanjut Slide 13 kesimpulan]</span>"`
       },
       13: {
         speaker: "Muchammad Rizky Ramadhani",
         nim: "2511102442203",
         role: "Presenter 7 (Kesimpulan Akhir)",
-        text: `"(Baca teks slide):<br><strong>Kesimpulannya</strong>, ekosistem pantai, estuari, dan laut merupakan ekosistem yang saling berkaitan dan sangat penting bagi kehidupan. Ketiganya menyediakan habitat bagi berbagai makhluk hidup, sumber pangan, perlindungan bagi wilayah pesisir, serta peluang ekonomi dan energi terbarukan. Oleh karena itu, sumber daya pesisir dan laut harus dimanfaatkan secara bijak dan berkelanjutan agar tetap dapat dinikmati oleh generasi masa kini dan masa depan.<br><span class='cue'>[Pindah ke Slide 14 untuk membuka sesi tanya jawab]</span>"`
+        text: `"<strong>Kesimpulan Tema 7</strong>:<br><br>Ekosistem pantai, estuari, dan laut adalah satu kesatuan yang tidak terpisahkan. Potensi SDA energi laut yang besar harus dimanfaatkan secara bijak dan berkelanjutan agar manfaatnya dirasakan jangka panjang.<br><span class='cue'>[Cue: Pindah Slide 14 Tanya Jawab]</span>"`
       },
       14: {
         speaker: "Muchammad Rizky Ramadhani",
         nim: "2511102442203",
         role: "Presenter 7 (Membuka Tanya Jawab)",
-        text: `"(Membuka Sesi Tanya Jawab):<br>Demikian pemaparan materi dari <strong>Kelompok 9</strong> mengenai Ekosistem Pesisir, Laut, dan Potensi SDA Energi. Selanjutnya, kami membuka sesi diskusi dan tanya jawab. Kami menyambut dengan senang hati tanggapan, masukan, maupun pertanyaan dari dosen pengampu kita, <strong>Bu ANDI DARAMUSSENG</strong>, serta rekan-rekan mahasiswa sekalian.<br><br><span class='cue'>[Tips: Klik tombol emas 'Bank Jawaban Q&A' di atas untuk membuka lembar contekan jawaban pertanyaan dosen/mahasiswa]</span>"`
+        text: `"Demikian pemaparan dari Kelompok 9.<br><br>Sekarang kami membuka sesi diskusi dan tanya jawab. Kami mengundang masukan dari <strong>Bu ANDI DARAMUSSENG</strong> serta pertanyaan dari rekan-rekan sekalian.<br><br><span class='cue'>[Tips: Klik tombol emas 'Bank Jawaban Q&A' untuk melihat contekan jawaban]</span>"`
       }
     };
 
@@ -1792,37 +1545,43 @@
         tag: "Prediksi Pertanyaan Dosen",
         type: "lecturer",
         q: "Mengapa ekosistem estuari dikatakan memiliki produktivitas biologis tertinggi, namun sekaligus paling rentan mengalami kerusakan?",
-        a: "<strong>Jawaban Inti:</strong> Produktivitasnya sangat tinggi karena estuari merupakan muara akumulasi nutrien dari aliran sungai daratan yang bertemu mineral laut, menjadikannya lumbung pangan dan <em>nursery ground</em> benih ikan/udang. Namun rentan karena wilayahnya semi-tertutup: polutan atau limbah kimia dari hulu mudah terperangkap dan mengendap di lumpur estuari, ditambah fluktuasi salinitas alami yang membuat biota estuari cepat stres jika terjadi pencemaran tambahan."
+        a: "<strong>Jawaban Inti:</strong> Produktivitasnya sangat tinggi karena estuari merupakan muara akumulasi nutrien dari aliran sungai daratan yang bertemu mineral laut. Namun sangat rentan karena wilayahnya semi-tertutup: polutan atau limbah kimia dari hulu mudah terperangkap dan mengendap di lumpur estuari."
       },
       {
         tag: "Prediksi Pertanyaan Dosen",
         type: "lecturer",
-        q: "Apa tantangan teknis dan lingkungan terbesar dalam pemanfaatan energi laut (OTEC/Gelombang) di perairan Indonesia?",
-        a: "<strong>Jawaban Inti:</strong> Pertama, <strong>biaya investasi awal (CAPEX)</strong> yang tinggi untuk instalasi di laut lepas. Kedua, <strong>faktor korosi tinggi dan biofouling</strong> (penempelan teritip dan alga) pada turbin akibat salinitas air laut. Ketiga, <strong>infrastruktur transmisi kabel bawah laut</strong> untuk menyalurkan listrik dari laut ke pulau-pulau yang membutuhkan. Keempat, perlunya analisis AMDAL agar penempatan turbin tidak merusak terumbu karang dan jalur tangkap nelayan tradisional."
+        q: "Apa tantangan teknis dan lingkungan terbesar dalam pemanfaatan energi laut (OTEC/Gelombang/Arus) di Indonesia?",
+        a: "<strong>Jawaban Inti:</strong> Tantangan utamanya adalah tingginya biaya investasi awal (CAPEX), korosi dan biofouling (penempelan biota laut) pada peralatan, serta infrastruktur transmisi kabel bawah laut menuju daratan."
+      },
+      {
+        tag: "Prediksi Pertanyaan Dosen",
+        type: "lecturer",
+        q: "Bagaimana peran instrumen AMDAL dan RZWP-3-K dalam mencegah konflik tata ruang pesisir?",
+        a: "<strong>Jawaban Inti:</strong> AMDAL berfungsi menghitung daya dukung lingkungan (*carrying capacity*) proyek pesisir, sedangkan RZWP-3-K membagi zonasi secara legal agar kawasan konservasi dan ruang tangkap nelayan tidak digusur oleh industri."
       },
       {
         tag: "Prediksi Pertanyaan Mahasiswa",
         type: "student",
-        q: "Mengapa mangrove dan padang lamun disebut 'Blue Carbon' dan apa bedanya dengan hutan biasa di darat?",
-        a: "<strong>Jawaban Inti:</strong> Karbon biru (<em>Blue Carbon</em>) adalah karbon yang diserap oleh ekosistem laut dan pesisir. Bedanya dengan hutan daratan: mangrove dan lamun mengendapkan karbon jauh ke dalam tanah sedimen yang terendam air (anaerobik). Karena minim oksigen, karbon tersebut terkunci dan tidak membusuk menjadi CO2 selama ratusan hingga ribuan tahun, sehingga laju penyerapannya hingga 5-10 kali lebih efektif per hektar dibandingkan hutan darat."
+        q: "Mengapa mangrove dan padang lamun disebut 'Blue Carbon'?",
+        a: "<strong>Jawaban Inti:</strong> Karena menyerap dan mengunci karbon jauh ke dalam tanah sedimen anaerobik (terendam air), menguncinya selama ratusan tahun tanpa membusuk menjadi CO2 (5-10x lebih efektif dibanding hutan darat)."
       },
       {
         tag: "Prediksi Pertanyaan Mahasiswa",
         type: "student",
-        q: "Bagaimana cara instrumen AMDAL mengatasi konflik antara reklamasi/wisata pesisir dengan kelestarian nelayan dan biota laut?",
-        a: "<strong>Jawaban Inti:</strong> AMDAL berfungsi sebagai studi kelayakan lingkungan yang wajib menghitung <strong>daya dukung lingkungan (*carrying capacity*)</strong>. AMDAL membatasi dampak sebaran sedimentasi lumpur yang bisa mematikan fotosintesis karang, serta mewajibkan konsultasi publik agar jalur mata pencaharian nelayan dan zonasi konservasi tetap terlindungi melalui Rencana Zonasi Wilayah Pesisir (RZWP-3-K)."
+        q: "Apa perbedaan abrasi alami dan abrasi akibat aktivitas manusia?",
+        a: "<strong>Jawaban Inti:</strong> Abrasi alami terjadi akibat dinamika gelombang pasang surut secara perlahan, sedangkan abrasi buatan dipicu pembabatan hutan mangrove, reklamasi, dan penambangan pasir laut."
       },
       {
         tag: "Prediksi Pertanyaan Mahasiswa",
         type: "student",
-        q: "Apakah pemanfaatan mikroalga atau rumput laut untuk bioenergi tidak akan bersaing dengan stok pangan manusia?",
-        a: "<strong>Jawaban Inti:</strong> Tidak, karena alga tergolong <em>bioenergi generasi ketiga</em>. Alga tidak memerlukan lahan tanah subur pertanian pangan dan tidak membutuhkan pupuk air tawar seperti halnya kelapa sawit atau jagung. Budidaya alga energi dapat dilakukan di perairan marjinal atau fotobioreaktor khusus tanpa mengganggu zonasi budidaya rumput laut konsumsi."
+        q: "Mengapa mikroalga dianggap sebagai bioenergi generasi ketiga yang ramah pangan?",
+        a: "<strong>Jawaban Inti:</strong> Karena budidaya alga tidak memerlukan tanah subur pertanian maupun air tawar, sehingga tidak bersaing dengan komoditas pangan seperti sawit atau jagung."
       }
     ];
 
     let currentSlide = 1;
     const totalSlides = 14;
-    let currentFontSize = 1.1;
+    let currentFontSize = 1.12;
     let isTransitioning = false;
     let activeMode = 'audience';
 
@@ -1857,6 +1616,48 @@
     const btnCloseQnAModal = document.getElementById('btnCloseQnAModal');
     const filterBtns = document.querySelectorAll('.qna-filter-btn');
 
+    function setMode(mode) {
+      activeMode = mode;
+      if (mode === 'audience') {
+        body.classList.remove('mode-presenter');
+        body.classList.add('mode-audience');
+        if (btnModeAudience) btnModeAudience.classList.add('active');
+        if (btnModePresenter) btnModePresenter.classList.remove('active');
+        if (teleprompterDrawer) teleprompterDrawer.classList.remove('open');
+      } else {
+        body.classList.remove('mode-audience');
+        body.classList.add('mode-presenter');
+        if (btnModePresenter) btnModePresenter.classList.add('active');
+        if (btnModeAudience) btnModeAudience.classList.remove('active');
+        if (teleprompterDrawer) teleprompterDrawer.classList.add('open');
+        startTimer();
+      }
+    }
+
+    if (btnModeAudience) {
+      btnModeAudience.addEventListener('click', (e) => {
+        e.preventDefault();
+        setMode('audience');
+      });
+    }
+
+    if (btnModePresenter) {
+      btnModePresenter.addEventListener('click', (e) => {
+        e.preventDefault();
+        setMode('presenter');
+      });
+    }
+
+    function startTimer() {
+      if (timerInterval) return;
+      timerInterval = setInterval(() => {
+        secondsElapsed++;
+        const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+        const secs = String(secondsElapsed % 60).padStart(2, '0');
+        if (timerDisplay) timerDisplay.textContent = `${mins}:${secs}`;
+      }, 1000);
+    }
+
     function renderQnAList(filter = 'all') {
       if (!qnaListContainer) return;
       const filtered = qnaBankData.filter(item => {
@@ -1872,18 +1673,12 @@
         </div>
       `).join('');
     }
-    renderQnAList();
-
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        renderQnAList(btn.getAttribute('data-filter'));
-      });
-    });
 
     function openQnAModal() {
-      if (qnaModal) qnaModal.classList.add('open');
+      if (qnaModal) {
+        qnaModal.classList.add('open');
+        renderQnAList('all');
+      }
     }
 
     function closeQnAModal() {
@@ -1893,6 +1688,139 @@
     if (btnOpenQnAModal) btnOpenQnAModal.addEventListener('click', openQnAModal);
     if (btnHeaderQnA) btnHeaderQnA.addEventListener('click', openQnAModal);
     if (btnCloseQnAModal) btnCloseQnAModal.addEventListener('click', closeQnAModal);
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderQnAList(btn.getAttribute('data-filter'));
+      });
+    });
+
+    const webAppUrlInput = document.getElementById('webAppUrlInput');
+    const btnSaveWebAppUrl = document.getElementById('btnSaveWebAppUrl');
+    const btnSyncFromSheet = document.getElementById('btnSyncFromSheet');
+    const btnApplyCustomImage = document.getElementById('btnApplyCustomImage');
+    const sheetModal = document.getElementById('sheetModal');
+
+    const customFileGalleryInput = document.getElementById('customFileGalleryInput');
+    const galleryPreviewBox = document.getElementById('galleryPreviewBox');
+    const imgGalleryPreview = document.getElementById('imgGalleryPreview');
+    let localImageDataUrl = "";
+
+    const DEFAULT_EXEC_URL = 'https://script.google.com/macros/s/AKfycbzAvV16xYS4PLs2JlV9lAcxsvyS__SYLFp2S1h-pPeOlG4LCV2jiQMicGL9hrsKmbQEmw/exec';
+
+    if (webAppUrlInput) {
+      webAppUrlInput.value = localStorage.getItem('kelompok9_webAppUrl') || DEFAULT_EXEC_URL;
+    }
+
+    if (btnSaveWebAppUrl) {
+      btnSaveWebAppUrl.addEventListener('click', () => {
+        localStorage.setItem('kelompok9_webAppUrl', webAppUrlInput.value.trim() || DEFAULT_EXEC_URL);
+        showToast("Web App URL Google Apps Script disimpan!");
+      });
+    }
+
+    if (customFileGalleryInput) {
+      customFileGalleryInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            localImageDataUrl = event.target.result;
+            if (imgGalleryPreview && galleryPreviewBox) {
+              imgGalleryPreview.src = localImageDataUrl;
+              galleryPreviewBox.style.display = 'block';
+            }
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
+    async function syncFromGoogleSheet() {
+      const url = localStorage.getItem('kelompok9_webAppUrl') || DEFAULT_EXEC_URL;
+      try {
+        const res = await fetch(url);
+        const json = await res.json();
+        if (json.status === "success" && json.data) {
+          Object.keys(json.data).forEach(slideId => {
+            const item = json.data[slideId];
+            const imgEl = document.getElementById(`img_${slideId}`);
+            const capEl = document.getElementById(`cap_${slideId}`);
+            const srcEl = document.getElementById(`src_${slideId}`);
+
+            if (imgEl && item.imageUrl) imgEl.src = item.imageUrl;
+            if (capEl && item.caption) capEl.innerHTML = `<strong>${item.caption}</strong>`;
+            if (srcEl && item.source) srcEl.textContent = `Sumber: ${item.source}`;
+          });
+          showToast("Data foto berhasil disinkronkan dari Google Sheet!");
+        }
+      } catch (err) {
+        console.warn("Sheet sync offline:", err);
+      }
+    }
+
+    if (btnSyncFromSheet) btnSyncFromSheet.addEventListener('click', syncFromGoogleSheet);
+
+    if (btnApplyCustomImage) {
+      btnApplyCustomImage.addEventListener('click', async () => {
+        const slideId = document.getElementById('slideTargetSelect').value;
+        const urlInputVal = document.getElementById('customImageUrlInput').value.trim();
+        const caption = document.getElementById('customCaptionInput').value.trim();
+        const source = document.getElementById('customSourceInput').value.trim();
+
+        const finalImageUrl = localImageDataUrl || urlInputVal;
+
+        if (!finalImageUrl) {
+          showToast("Pilih foto dari Galeri atau masukkan URL Foto!");
+          return;
+        }
+
+        const imgEl = document.getElementById(`img_${slideId}`);
+        const capEl = document.getElementById(`cap_${slideId}`);
+        const srcEl = document.getElementById(`src_${slideId}`);
+
+        if (imgEl) imgEl.src = finalImageUrl;
+        if (capEl && caption) capEl.innerHTML = `<strong>${caption}</strong>`;
+        if (srcEl && source) srcEl.textContent = `Sumber: ${source}`;
+
+        const url = localStorage.getItem('kelompok9_webAppUrl') || DEFAULT_EXEC_URL;
+        
+        if (urlInputVal) {
+          try {
+            await fetch(url, {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: { 'Content-Type': 'text/plain' },
+              body: JSON.stringify({ slideId, imageUrl: urlInputVal, caption, source })
+            });
+            showToast(`Foto slide ${slideId} berhasil dikirim ke Google Sheet!`);
+          } catch (err) {
+            showToast("Foto diterapkan secara lokal.");
+          }
+        } else {
+          showToast(`Foto galeri lokal diterapkan pada ${slideId}!`);
+        }
+
+        localImageDataUrl = "";
+        if (customFileGalleryInput) customFileGalleryInput.value = "";
+        if (galleryPreviewBox) galleryPreviewBox.style.display = 'none';
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.createElement('div');
+      toast.style.cssText = "position:fixed; bottom:80px; right:20px; background:#00f2fe; color:#020713; padding:10px 18px; border-radius:10px; font-weight:800; z-index:500; box-shadow:0 0 15px rgba(0,242,254,0.4);";
+      toast.textContent = msg;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    }
+
+    const btnOpenSheetModal = document.getElementById('btnOpenSheetModal');
+    const btnCloseSheetModal = document.getElementById('btnCloseSheetModal');
+    if (btnOpenSheetModal) btnOpenSheetModal.addEventListener('click', () => sheetModal.classList.add('open'));
+    if (btnCloseSheetModal) btnCloseSheetModal.addEventListener('click', () => sheetModal.classList.remove('open'));
 
     const overviewModal = document.getElementById('overviewModal');
     const overviewGrid = document.getElementById('overviewGrid');
@@ -1907,15 +1835,9 @@
       morphShockwave.classList.add('trigger');
     }
 
-    /**
-     * Advanced Morph Engine with "1-to-N Box Splitting / Fusion" Physics
-     * If the destination slide contains multiple cards while origin had 1 narrative box,
-     * the daughter cards are spawned from the mother box with an outward spring motion!
-     */
     function performVariedPPTMorph(prevEl, nextEl, direction) {
       triggerShockwave();
 
-      // 1. FIRST: Measure bounding boxes of morph keys in outgoing slide
       const firstMap = new Map();
       let parentNarrativeRect = null;
 
@@ -1933,7 +1855,6 @@
         });
       }
 
-      // 2. DOM SWITCH: Smoothly fade and swap active visibility
       if (prevEl) {
         prevEl.style.transition = 'opacity 0.4s ease, transform 0.45s ease';
         prevEl.style.transform = direction === 'forward' ? 'scale(0.96) translateY(-15px)' : 'scale(0.96) translateY(15px)';
@@ -1948,19 +1869,16 @@
       nextEl.style.pointerEvents = 'auto';
       nextEl.scrollTop = 0;
 
-      // 3. LAST: Calculate destination positions and execute tailored morph motions
       const morphTargetEls = nextEl.querySelectorAll('[data-morph]');
-      const pointCards = nextEl.querySelectorAll('.point-card');
+      const pointCards = nextEl.querySelectorAll('.point-card, .evidence-box');
       const hasMultipleCards = pointCards.length > 1;
 
-      // Check if we are performing a "1 BOX SPLITS INTO MULTIPLE BOXES" kinetic jump
       const isSplitTransition = parentNarrativeRect && hasMultipleCards;
 
       morphTargetEls.forEach((el, index) => {
         const key = el.getAttribute('data-morph');
         
         if (key && firstMap.has(key)) {
-          // KEY EXISTS IN BOTH: Exact PPT Morph gliding
           const firstRect = firstMap.get(key);
           const lastRect = el.getBoundingClientRect();
 
@@ -1974,7 +1892,7 @@
           el.style.transformOrigin = 'top left';
           el.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${scaleW}, ${scaleH})`;
           el.style.transition = 'none';
-          void el.offsetHeight; // Reflow
+          void el.offsetHeight;
 
           requestAnimationFrame(() => {
             el.style.transition = 'transform 1.15s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease, background 0.8s ease';
@@ -1987,10 +1905,8 @@
             el.style.transition = '';
           }, 1200);
 
-        } else if (isSplitTransition && el.classList.contains('point-card')) {
-          // KINETIC BOX-SPLIT TRANSITION: Daughter card emerges from mother narrative box!
+        } else if (isSplitTransition && (el.classList.contains('point-card') || el.classList.contains('evidence-box'))) {
           const lastRect = el.getBoundingClientRect();
-          // Origin center of the parent box
           const parentCenterX = parentNarrativeRect.left + (parentNarrativeRect.width / 2);
           const parentCenterY = parentNarrativeRect.top + (parentNarrativeRect.height / 2);
           
@@ -2000,7 +1916,6 @@
           const deltaX = parentCenterX - cardCenterX;
           const deltaY = parentCenterY - cardCenterY;
 
-          // Start inside the parent box, scaled down and translucent
           el.style.transformOrigin = 'center center';
           el.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(0.35)`;
           el.style.opacity = '0';
@@ -2008,7 +1923,6 @@
           el.style.transition = 'none';
           void el.offsetHeight;
 
-          // Staggered ejection into their grid position
           const delayMs = 60 + (index * 110);
           setTimeout(() => {
             requestAnimationFrame(() => {
@@ -2027,7 +1941,6 @@
           }, 1300);
 
         } else {
-          // NOVEL COMPONENT ENTRANCE: Floating glide-in with depth
           el.style.opacity = '0';
           el.style.transform = direction === 'forward' ? 'translateY(36px) scale(0.96)' : 'translateY(-36px) scale(0.96)';
           el.style.filter = 'blur(8px)';
@@ -2064,22 +1977,20 @@
 
         performVariedPPTMorph(prevEl, nextEl, direction);
 
-        // Update progress bar & slide counter
         const progressPercent = (currentSlide / totalSlides) * 100;
-        progressBar.style.width = `${progressPercent}%`;
-        currentSlideNum.textContent = currentSlide < 10 ? `0${currentSlide}` : currentSlide;
+        if (progressBar) progressBar.style.width = `${progressPercent}%`;
+        if (currentSlideNum) currentSlideNum.textContent = currentSlide < 10 ? `0${currentSlide}` : currentSlide;
 
-        btnPrev.disabled = currentSlide === 1;
-        btnNext.disabled = currentSlide === totalSlides;
+        if (btnPrev) btnPrev.disabled = currentSlide === 1;
+        if (btnNext) btnNext.disabled = currentSlide === totalSlides;
 
-        // Update speaker teleprompter
         const scriptInfo = scriptsData[currentSlide];
         if (scriptInfo) {
           const roleParts = scriptInfo.role.split(' ');
-          scriptBadge.textContent = roleParts[0] + ' ' + (roleParts[1] || '');
-          scriptSpeaker.innerHTML = `${scriptInfo.speaker} <span style="font-size:0.78rem; opacity:0.8;">(${scriptInfo.nim})</span>`;
-          scriptContent.innerHTML = scriptInfo.text;
-          activePresenterName.textContent = `${scriptInfo.speaker}`;
+          if (scriptBadge) scriptBadge.textContent = roleParts[0] + ' ' + (roleParts[1] || '');
+          if (scriptSpeaker) scriptSpeaker.innerHTML = `${scriptInfo.speaker} <span style="font-size:0.78rem; opacity:0.85;">(${scriptInfo.nim})</span>`;
+          if (scriptContent) scriptContent.innerHTML = scriptInfo.text;
+          if (activePresenterName) activePresenterName.textContent = `${scriptInfo.speaker}`;
         }
 
         updateOverviewHighlight();
@@ -2092,47 +2003,11 @@
       }
     }
 
-    function nextSlide() {
-      if (currentSlide < totalSlides) goToSlide(currentSlide + 1, 'forward');
-    }
+    function nextSlide() { if (currentSlide < totalSlides) goToSlide(currentSlide + 1, 'forward'); }
+    function prevSlide() { if (currentSlide > 1) goToSlide(currentSlide - 1, 'backward'); }
 
-    function prevSlide() {
-      if (currentSlide > 1) goToSlide(currentSlide - 1, 'backward');
-    }
-
-    btnNext.addEventListener('click', nextSlide);
-    btnPrev.addEventListener('click', prevSlide);
-
-    function setMode(mode) {
-      activeMode = mode;
-      if (mode === 'audience') {
-        body.classList.remove('mode-presenter');
-        body.classList.add('mode-audience');
-        btnModeAudience.classList.add('active');
-        btnModePresenter.classList.remove('active');
-        teleprompterDrawer.classList.remove('open');
-      } else {
-        body.classList.remove('mode-audience');
-        body.classList.add('mode-presenter');
-        btnModePresenter.classList.add('active');
-        btnModeAudience.classList.remove('active');
-        teleprompterDrawer.classList.add('open');
-        startTimer();
-      }
-    }
-
-    btnModeAudience.addEventListener('click', () => setMode('audience'));
-    btnModePresenter.addEventListener('click', () => setMode('presenter'));
-
-    function startTimer() {
-      if (timerInterval) return;
-      timerInterval = setInterval(() => {
-        secondsElapsed++;
-        const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
-        const secs = String(secondsElapsed % 60).padStart(2, '0');
-        timerDisplay.textContent = `${mins}:${secs}`;
-      }, 1000);
-    }
+    if (btnNext) btnNext.addEventListener('click', nextSlide);
+    if (btnPrev) btnPrev.addEventListener('click', prevSlide);
 
     let touchStartX = 0;
     let touchEndX = 0;
@@ -2154,32 +2029,21 @@
       const diffX = touchEndX - touchStartX;
       const diffY = touchEndY - touchStartY;
       if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY) * 1.3) {
-        if (diffX < 0) {
-          nextSlide();
-        } else {
-          prevSlide();
-        }
+        if (diffX < 0) nextSlide();
+        else prevSlide();
       }
     }
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        if (qnaModal && qnaModal.classList.contains('open')) {
-          closeQnAModal();
-          return;
-        }
-        if (overviewModal.classList.contains('open')) {
-          overviewModal.classList.remove('open');
-          return;
-        }
+        if (qnaModal && qnaModal.classList.contains('open')) { closeQnAModal(); return; }
+        if (overviewModal && overviewModal.classList.contains('open')) { overviewModal.classList.remove('open'); return; }
       }
 
       if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
-        e.preventDefault();
-        nextSlide();
+        e.preventDefault(); nextSlide();
       } else if (e.key === 'ArrowLeft' || e.key === 'Backspace' || e.key === 'PageUp') {
-        e.preventDefault();
-        prevSlide();
+        e.preventDefault(); prevSlide();
       } else if (e.key.toLowerCase() === 'f') {
         toggleFullscreen();
       } else if (e.key.toLowerCase() === 'p') {
@@ -2189,25 +2053,28 @@
       }
     });
 
-    btnCloseScript.addEventListener('click', () => {
-      teleprompterDrawer.classList.remove('open');
-    });
+    if (btnCloseScript) btnCloseScript.addEventListener('click', () => teleprompterDrawer.classList.remove('open'));
 
-    btnFontUp.addEventListener('click', () => {
-      if (currentFontSize < 1.6) {
-        currentFontSize += 0.15;
-        scriptContent.style.fontSize = `${currentFontSize}rem`;
-      }
-    });
+    if (btnFontUp) {
+      btnFontUp.addEventListener('click', () => {
+        if (currentFontSize < 1.6) {
+          currentFontSize += 0.15;
+          if (scriptContent) scriptContent.style.fontSize = `${currentFontSize}rem`;
+        }
+      });
+    }
 
-    btnFontDown.addEventListener('click', () => {
-      if (currentFontSize > 0.85) {
-        currentFontSize -= 0.15;
-        scriptContent.style.fontSize = `${currentFontSize}rem`;
-      }
-    });
+    if (btnFontDown) {
+      btnFontDown.addEventListener('click', () => {
+        if (currentFontSize > 0.85) {
+          currentFontSize -= 0.15;
+          if (scriptContent) scriptContent.style.fontSize = `${currentFontSize}rem`;
+        }
+      });
+    }
 
     function buildOverviewGrid() {
+      if (!overviewGrid) return;
       overviewGrid.innerHTML = '';
       slides.forEach((slide, i) => {
         const slideIndex = i + 1;
@@ -2220,12 +2087,12 @@
         card.innerHTML = `
           <div class="overview-thumb-num">SLIDE ${slideIndex < 10 ? '0' + slideIndex : slideIndex}</div>
           <div class="overview-thumb-title">${titleText}</div>
-          <div class="overview-thumb-speaker">${scriptInfo.speaker}</div>
+          <div class="overview-thumb-speaker">${scriptInfo ? scriptInfo.speaker : ''}</div>
         `;
         card.addEventListener('click', () => {
           const dir = slideIndex > currentSlide ? 'forward' : 'backward';
           goToSlide(slideIndex, dir);
-          overviewModal.classList.remove('open');
+          if (overviewModal) overviewModal.classList.remove('open');
         });
         overviewGrid.appendChild(card);
       });
@@ -2239,14 +2106,15 @@
     }
 
     function toggleOverview() {
+      if (!overviewModal) return;
       overviewModal.classList.toggle('open');
       if (overviewModal.classList.contains('open')) {
         buildOverviewGrid();
       }
     }
 
-    btnToggleOverview.addEventListener('click', toggleOverview);
-    btnCloseOverview.addEventListener('click', () => overviewModal.classList.remove('open'));
+    if (btnToggleOverview) btnToggleOverview.addEventListener('click', toggleOverview);
+    if (btnCloseOverview) btnCloseOverview.addEventListener('click', () => overviewModal.classList.remove('open'));
 
     function toggleFullscreen() {
       if (!document.fullscreenElement) {
@@ -2254,19 +2122,18 @@
           console.warn(`Fullscreen tidak diizinkan: ${err.message}`);
         });
       } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        }
+        if (document.exitFullscreen) document.exitFullscreen();
       }
     }
-    btnFullscreen.addEventListener('click', toggleFullscreen);
+    if (btnFullscreen) btnFullscreen.addEventListener('click', toggleFullscreen);
 
     const canvas = document.getElementById('oceanCanvas');
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas ? canvas.getContext('2d') : null;
     let particles = [];
     const particleCount = 45;
 
     function resizeCanvas() {
+      if (!canvas) return;
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
@@ -2274,10 +2141,9 @@
     resizeCanvas();
 
     class Particle {
-      constructor() {
-        this.reset();
-      }
+      constructor() { this.reset(); }
       reset() {
+        if (!canvas) return;
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
         this.radius = Math.random() * 2.2 + 0.8;
@@ -2287,6 +2153,7 @@
         this.color = Math.random() > 0.4 ? '0, 242, 254' : '16, 185, 129';
       }
       update() {
+        if (!canvas) return;
         this.y += this.speedY;
         this.x += this.speedX;
         if (this.y < -10) this.y = canvas.height + 10;
@@ -2294,6 +2161,7 @@
         if (this.x > canvas.width + 10) this.x = -10;
       }
       draw() {
+        if (!ctx) return;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${this.color}, ${this.alpha})`;
@@ -2309,23 +2177,26 @@
     }
 
     function animateOcean() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
+      if (ctx && canvas) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => { p.update(); p.draw(); });
+      }
       requestAnimationFrame(animateOcean);
     }
     animateOcean();
 
-    /* Initializing first slide state */
+    // Initial load setup
     const initialScript = scriptsData[1];
-    const initialRoleParts = initialScript.role.split(' ');
-    scriptBadge.textContent = initialRoleParts[0] + ' ' + (initialRoleParts[1] || '');
-    scriptSpeaker.innerHTML = `${initialScript.speaker} <span style="font-size:0.78rem; opacity:0.8;">(${initialScript.nim})</span>`;
-    scriptContent.innerHTML = initialScript.text;
-    activePresenterName.textContent = `${initialScript.speaker}`;
+    if (initialScript) {
+      const initialRoleParts = initialScript.role.split(' ');
+      if (scriptBadge) scriptBadge.textContent = initialRoleParts[0] + ' ' + (initialRoleParts[1] || '');
+      if (scriptSpeaker) scriptSpeaker.innerHTML = `${initialScript.speaker} <span style="font-size:0.78rem; opacity:0.85;">(${initialScript.nim})</span>`;
+      if (scriptContent) scriptContent.innerHTML = initialScript.text;
+      if (activePresenterName) activePresenterName.textContent = `${initialScript.speaker}`;
+    }
+    renderQnAList();
     buildOverviewGrid();
+    setTimeout(syncFromGoogleSheet, 800);
   </script>
 </body>
 </html>
